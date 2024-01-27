@@ -22,16 +22,18 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class SensorBrowserWindow : BrickManagerWindow {
         internal Ui.Menu menu;
 
         public SensorBrowserWindow () {
-            title ="Sensors";
+            title = "Sensors";
             menu = new Ui.Menu () {
-                margin_top = -3
+                spacing = 0,
+                padding = 0,
+                padding_top = -1,
+                padding_right = 1
             };
             content_vbox.add (menu);
         }

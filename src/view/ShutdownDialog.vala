@@ -28,7 +28,6 @@ using Ev3devKit.Ui;
 namespace BrickManager {
     public class ShutdownDialog : Dialog {
         Box dialog_vbox;
-        Label title;
         Box button_vbox;
         Button power_off_button;
         Button reboot_button;
@@ -39,26 +38,31 @@ namespace BrickManager {
 
         public ShutdownDialog () {
             dialog_vbox = new Box.vertical ();
-            title = new Label ("Shutdown...") {
+            add (dialog_vbox);
+
+            dialog_vbox.add (new Label ("Shutdown") {
                 padding = 2,
+                padding_top = 0,
                 border_bottom = 1
-            };
-            dialog_vbox.add (title);
+            });
+
             button_vbox = new Box.vertical () {
                 margin = 4,
                 margin_top = 2
             };
             dialog_vbox.add (button_vbox);
-            power_off_button = new Button.with_label ("Power Off");
+
+            power_off_button = new Button.with_label ("Power off");
             power_off_button.pressed.connect (on_power_off_button_pressed);
             button_vbox.add (power_off_button);
+
             reboot_button = new Button.with_label ("Reboot");
             reboot_button.pressed.connect (on_reboot_button_pressed);
             button_vbox.add (reboot_button);
+
             cancel_button = new Button.with_label ("Cancel");
             cancel_button.pressed.connect (on_cancel_button_pressed);
             button_vbox.add (cancel_button);
-            add (dialog_vbox);
         }
 
         void on_power_off_button_pressed () {

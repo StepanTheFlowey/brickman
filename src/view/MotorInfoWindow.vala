@@ -44,15 +44,17 @@ namespace BrickManager {
             string address, bool show_watch_button)
         {
             title = name;
+
             var vscroll = new Scroll.vertical () {
                 can_focus = false,
                 margin_top = -3
             };
             content_vbox.add (vscroll);
+
             var vbox = new Box.vertical ();
             vscroll.add (vbox);
 
-            var class_name_label = new Label ("Sysfs Class:") {
+            var class_name_label = new Label ("Sysfs class:") {
                 margin_top = SPACING,
                 can_focus = true
             };
@@ -63,22 +65,20 @@ namespace BrickManager {
                     vscroll.scroll_to_child (class_name_label);
             });
             vbox.add (class_name_label);
-            var class_name_value_label = new Label (class_name);
-            vbox.add (class_name_value_label);
 
-            var device_name_label = new Label ("Device name:") {
-                margin_top = SPACING
-            };
-            vbox.add (device_name_label);
-            var device_name_value_label = new Label (device_name);
-            vbox.add (device_name_value_label);
+            vbox.add (new Label (class_name));
 
-            var address_label = new Label ("Address:") {
+            vbox.add (new Label ("Device name:") {
                 margin_top = SPACING
-            };
-            vbox.add (address_label);
-            var address_value_label = new Label (address);
-            vbox.add (address_value_label);
+            });
+
+            vbox.add (new Label (device_name));
+
+            vbox.add (new Label ("Address:") {
+                margin_top = SPACING
+            });
+
+            vbox.add (new Label (address));
 
             // TODO: driver needs notification support before making this visible
             //var running_label = new Label ("Running:") {

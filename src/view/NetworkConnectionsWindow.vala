@@ -33,9 +33,12 @@ namespace BrickManager {
         public signal void connection_selected (Object user_data);
 
         public NetworkConnectionsWindow () {
-            title = "All Network Connections";
+            title = "All connections";
             menu = new Ui.Menu () {
-                spacing = 2
+                spacing = 1,
+                padding = 0,
+                padding_top = -1,
+                padding_right = 1
             };
             content_vbox.add (menu);
         }

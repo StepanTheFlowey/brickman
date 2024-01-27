@@ -23,8 +23,6 @@
  * Dialog for getting user input (text).
  */
 
-// TODO: Move this class to Ev3devKit.
-
 using Ev3devKit.Ui;
 
 namespace BrickManager {
@@ -43,24 +41,31 @@ namespace BrickManager {
                 padding = 3,
                 spacing = 6
             };
+            add (dialog_vbox);
+
             message_label = new Label (message);
             dialog_vbox.add (message_label);
+
             value_entry = new TextEntry (initial_value);
             dialog_vbox.add (value_entry);
+
             dialog_vbox.add (new Spacer ());
+
             var button_vbox = new Box.vertical ();
             dialog_vbox.add (button_vbox);
+
             var button_hbox = new Box.horizontal () {
                 horizontal_align = WidgetAlign.CENTER
             };
             button_vbox.add (button_hbox);
+
             cancel_button = new Button.with_label ("Cancel");
             cancel_button.pressed.connect (on_cancel_button_pressed);
             button_hbox.add (cancel_button);
+
             accept_button = new Button.with_label ("Accept");
             accept_button.pressed.connect (on_accept_button_pressed);
             button_hbox.add (accept_button);
-            add (dialog_vbox);
         }
 
         void on_accept_button_pressed () {

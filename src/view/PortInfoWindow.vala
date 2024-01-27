@@ -67,15 +67,18 @@ namespace BrickManager {
 
         public PortInfoWindow (string address, string device_name, string driver_name) {
             title = address;
+
             vscroll = new Scroll.vertical () {
-                margin_top = -3,
+                padding = 0,
+                padding_top = 1,
                 can_focus = false
             };
             content_vbox.add (vscroll);
+
             scroll_vbox = new Box.vertical ();
             vscroll.add (scroll_vbox);
+
             var device_name_label = new Label ("Device name:") {
-                margin_top = SPACING,
                 can_focus = true
             };
             var device_name_label_has_focus_handler_id =
@@ -85,26 +88,29 @@ namespace BrickManager {
                     vscroll.scroll_to_child (device_name_label);
             });
             scroll_vbox.add (device_name_label);
-            var device_name_value_label = new Label (device_name);
-            scroll_vbox.add (device_name_value_label);
-            var driver_name_label = new Label ("Driver name:") {
+
+            scroll_vbox.add (new Label (device_name));
+
+            scroll_vbox.add (new Label ("Driver name:") {
                 margin_top = SPACING
-            };
-            scroll_vbox.add (driver_name_label);
-            var driver_name_value_label = new Label (driver_name);
-            scroll_vbox.add (driver_name_value_label);
-            var mode_label = new Label ("Mode:") {
+            });
+
+            scroll_vbox.add (new Label (driver_name));
+
+            scroll_vbox.add (new Label ("Mode:") {
                 margin_top = SPACING
-            };
-            scroll_vbox.add (mode_label);
+            });
+
             mode_value_label = new Label ("???");
             scroll_vbox.add (mode_value_label);
-            var status_label = new Label ("Status:") {
+
+            scroll_vbox.add (new Label ("Status:") {
                 margin_top = SPACING
-            };
-            scroll_vbox.add (status_label);
+            });
+
             status_value_label = new Label ("???");
             scroll_vbox.add (status_value_label);
+
             set_device_button = new Button.with_label ("Set device") {
                 margin = SPACING,
                 margin_bottom = 0
@@ -115,6 +121,7 @@ namespace BrickManager {
             });
             set_device_button.pressed.connect (() => set_device_button_pressed ());
             // don't add set_device_button - see can_set_device property
+
             set_mode_button = new Button.with_label ("Set mode") {
                 margin = SPACING
             };

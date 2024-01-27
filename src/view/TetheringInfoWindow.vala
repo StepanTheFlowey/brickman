@@ -54,42 +54,48 @@ namespace BrickManager {
         }
 
         public TetheringInfoWindow () {
-            title = "Tethering Network Info";
+            title = "Tethering network info";
+
             var vscroll = new Scroll.vertical () {
                 margin_top = -3
             };
             content_vbox.add (vscroll);
+
             var scroll_vbox = new Box.vertical ();
             vscroll.add (scroll_vbox);
-            var ipv4_label = new Label ("IPV4") {
+
+            scroll_vbox.add (new Label ("IPV4") {
                 border_bottom = 1,
                 margin = 3
-            };
-            scroll_vbox.add (ipv4_label);
-            var ipv4_address_label = new Label ("IP Address:");
-            scroll_vbox. add (ipv4_address_label);
+            });
+
+            scroll_vbox.add (new Label ("IP Address:"));
+
             ipv4_address_value_label = new Label ("???");
-            scroll_vbox. add (ipv4_address_value_label);
-            var ipv4_netmask_label = new Label ("Mask:") {
+            scroll_vbox.add (ipv4_address_value_label);
+
+            scroll_vbox.add (new Label ("Mask:") {
                 margin_top = 3
-            };
-            scroll_vbox. add (ipv4_netmask_label);
+            });
+
             ipv4_netmask_value_label = new Label ("???");
-            scroll_vbox. add (ipv4_netmask_value_label);
-            var enet_label = new Label ("ENET") {
+            scroll_vbox.add (ipv4_netmask_value_label);
+
+            scroll_vbox.add (new Label ("ENET") {
                 border_bottom = 1,
                 margin = 3,
                 margin_top = 6
-            };
-            scroll_vbox.add (enet_label);
-            var enet_iface_label = new Label ("Interface:");
-            scroll_vbox.add (enet_iface_label);
+            });
+
+            scroll_vbox.add (new Label ("Interface:"));
+
             enet_iface_value_label = new Label ("???");
             scroll_vbox.add (enet_iface_value_label);
-            var enet_mac_label = new Label ("MAC:") {
+
+            scroll_vbox.add (new Label ("MAC:") {
                 margin_top = 3
-            };
-            scroll_vbox.add (enet_mac_label);
+            });
+
             enet_mac_value_label = new Label ("???");
             scroll_vbox.add (enet_mac_value_label);
         }

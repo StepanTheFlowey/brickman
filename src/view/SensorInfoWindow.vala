@@ -40,13 +40,16 @@ namespace BrickManager {
 
         public SensorInfoWindow (string name, string device_name, string address, bool supports_commands) {
             title = name;
+
             var vscroll = new Scroll.vertical () {
                 can_focus = false,
                 margin_top = -3
             };
             content_vbox.add (vscroll);
+
             var vbox = new Box.vertical ();
             vscroll.add (vbox);
+
             var device_name_label = new Label ("Device name:") {
                 can_focus = true
             };
@@ -57,20 +60,22 @@ namespace BrickManager {
                     vscroll.scroll_to_child (device_name_label);
             });
             vbox.add (device_name_label);
-            var device_name_value_label = new Label (device_name);
-            vbox.add (device_name_value_label);
-            var address_label = new Label ("Address:") {
+
+            vbox.add (new Label (device_name));
+
+            vbox.add (new Label ("Address:") {
                 margin_top = SPACING
-            };
-            vbox.add (address_label);
-            var address_value_label = new Label (address);
-            vbox.add (address_value_label);
-            var mode_label = new Label ("Mode:") {
+            });
+
+            vbox.add (new Label (address));
+
+            vbox.add (new Label ("Mode:") {
                 margin_top = SPACING
-            };
-            vbox.add (mode_label);
+            });
+
             mode_value_label = new Label ("???");
             vbox.add (mode_value_label);
+
             var watch_values_button = new Button.with_label ("Watch values") {
                 margin = SPACING,
                 margin_bottom = 0
@@ -83,6 +88,7 @@ namespace BrickManager {
             });
             watch_values_button.pressed.connect (() => watch_values_selected ());
             vbox.add (watch_values_button);
+
             var set_mode_button = new Button.with_label ("Set mode") {
                 margin = SPACING,
                 margin_bottom = 0
@@ -95,6 +101,7 @@ namespace BrickManager {
             });
             set_mode_button.pressed.connect (() => set_mode_selected ());
             vbox.add (set_mode_button);
+
             if (supports_commands) {
                 var send_command_button = new Button.with_label ("Send command") {
                     margin = SPACING

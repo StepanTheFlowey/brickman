@@ -27,7 +27,6 @@ namespace BrickManager {
     public class BatteryInfoWindow : BrickManagerWindow {
         const string UNKNOWN_VALUE = "???";
 
-        Grid info_grid;
         Label tech_label;
         Label tech_value_label;
         Label voltage_label;
@@ -93,50 +92,60 @@ namespace BrickManager {
             }
         }
 
-        public BatteryInfoWindow (string display_name) {
-            title = display_name;
-            info_grid = new Grid (4, 2);
+        public BatteryInfoWindow (string name) {
+            title = name;
+
+            var info_grid = new Grid (4, 2);
             content_vbox.add (info_grid);
+
             tech_label = new Label ("Type:") {
                 horizontal_align = WidgetAlign.END,
                 padding = 2
             };
+            info_grid.add (tech_label);
+
             tech_value_label = new Label (UNKNOWN_VALUE) {
                 horizontal_align = WidgetAlign.START,
                 padding = 2
             };
+            info_grid.add (tech_value_label);
+
             voltage_label = new Label ("Voltage:") {
                 horizontal_align = WidgetAlign.END,
                 padding = 2
             };
+            info_grid.add (voltage_label);
+
             voltage_value_label = new Label (UNKNOWN_VALUE) {
                 horizontal_align = WidgetAlign.START,
                 padding = 2
             };
+            info_grid.add (voltage_value_label);
+
             current_label = new Label ("Current:") {
                 horizontal_align = WidgetAlign.END,
                 padding = 2
             };
+            info_grid.add (current_label);
+
             current_value_label = new Label (UNKNOWN_VALUE) {
                 horizontal_align = WidgetAlign.START,
                 padding = 2
             };
+            info_grid.add (current_value_label);
+
             power_label = new Label ("Power:") {
                 horizontal_align = WidgetAlign.END,
                 padding = 2
             };
+            info_grid.add (power_label);
+
             power_value_label = new Label (UNKNOWN_VALUE) {
                 horizontal_align = WidgetAlign.START,
                 padding = 2
             };
-            info_grid.add (tech_label);
-            info_grid.add (tech_value_label);
-            info_grid.add (voltage_label);
-            info_grid.add (voltage_value_label);
-            info_grid.add (current_label);
-            info_grid.add (current_value_label);
-            info_grid.add (power_label);
             info_grid.add (power_value_label);
+
             content_vbox.add (new Spacer ());
         }
     }

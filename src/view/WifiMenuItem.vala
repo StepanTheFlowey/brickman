@@ -81,14 +81,18 @@ namespace BrickManager {
                 text_horizontal_align = Grx.TextHAlign.LEFT
             });
             button.pressed.connect (on_button_pressed);
+
             hbox = new Box.horizontal ();
             button.add (hbox);
+
             connected_label = new Label ("*") {
                 horizontal_align = WidgetAlign.START,
                 visible = false
             };
             hbox.add (connected_label);
+
             hbox.add (label);
+
             try {
                 secure_icon = new Ui.Icon.from_stock (StockIcon.LOCK_7X9) {
                     horizontal_align = WidgetAlign.END,
@@ -101,6 +105,7 @@ namespace BrickManager {
             } catch (Error err) {
                 critical ("%s", err.message);
             }
+
             signal_bars = new SignalBars () {
                 horizontal_align = WidgetAlign.END,
                 vertical_align = WidgetAlign.CENTER

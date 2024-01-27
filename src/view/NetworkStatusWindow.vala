@@ -24,20 +24,17 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class NetworkStatusWindow : BrickManagerWindow {
-        Box state_hbox;
-        Label state_label;
-        Label state_value_label;
+        Ui.Label state_label;
         Ui.Menu menu;
         Ui.MenuItem network_connections_menu_item;
-        CheckboxMenuItem offline_mode_menu_item;
+        Ui.CheckboxMenuItem offline_mode_menu_item;
 
         public string state {
-            get { return state_value_label.text; }
-            set { state_value_label.text = value; }
+            get { return state_label.text; }
+            set { state_label.text = value; }
         }
 
         public bool offline_mode {
@@ -50,26 +47,46 @@ namespace BrickManager {
 
         public NetworkStatusWindow (string display_name) {
             title = display_name;
-            state_hbox = new Box.horizontal () {
-                horizontal_align = WidgetAlign.CENTER,
-                vertical_align = WidgetAlign.CENTER
+
+            var state_hbox = new Ui.Box.horizontal () {
+                horizontal_align = Ui.WidgetAlign.CENTER,
+                vertical_align = Ui.WidgetAlign.CENTER,
+                padding_top = -5
             };
             content_vbox.add (state_hbox);
-            state_label = new Label ("Status:");
+
+            state_hbox.add (new Ui.Label ("Status:") {
+                horizontal_align = Ui.WidgetAlign.END,
+                margin_right = 4
+            });
+
+            state_label = new Ui.Label ("???") {
+                horizontal_align = Ui.WidgetAlign.START
+            };
             state_hbox.add (state_label);
-            state_value_label = new Label ("???");
-            state_hbox.add (state_value_label);
+
             menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = 1,
                 border_top = 1
             };
             content_vbox.add (menu);
-            network_connections_menu_item = new Ui.MenuItem.with_right_arrow ("All Network Connections");
+
+            network_connections_menu_item = new Ui.MenuItem.with_right_arrow ("All connections");
+            network_connections_menu_item.button.padding_top = -3;
             network_connections_menu_item.button.pressed.connect (() => network_connections_selected ());
             menu.add_menu_item (network_connections_menu_item);
+
             var tethering_menu_item = new Ui.MenuItem.with_right_arrow ("Tethering");
+            tethering_menu_item.button.padding_top = -3;
             tethering_menu_item.button.pressed.connect (() => tethering_selected ());
             menu.add_menu_item (tethering_menu_item);
-            offline_mode_menu_item = new CheckboxMenuItem ("Offline Mode");
+
+            offline_mode_menu_item = new Ui.CheckboxMenuItem ("Offline mode");
+            offline_mode_menu_item.button.padding_top = -3;
+            offline_mode_menu_item.checkbox.margin_top = 3;
+            offline_mode_menu_item.checkbox.margin_bottom = -3;
             offline_mode_menu_item.checkbox.notify["checked"].connect ((s, p) => {
                 notify_property ("offline-mode");
             });
@@ -80,6 +97,7 @@ namespace BrickManager {
             var menu_item = new Ui.MenuItem.with_right_arrow (controller.display_name) {
                 represented_object = controller
             };
+            menu_item.button.padding_top = -3;
             menu_item.button.pressed.connect (() => controller.show_main_window ());
             menu.insert_menu_item (menu_item, network_connections_menu_item);
         }

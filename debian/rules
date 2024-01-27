@@ -1,11 +1,12 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+export DH_QUIET=1
 
 %:
-	dh $@
+	dh $@ --builddirectory=.
 
 override_dh_installinit:
 	# don't do anything
+
+execute_after_dh_auto_build:
+	strip -s -R .note* -R .comment brickman

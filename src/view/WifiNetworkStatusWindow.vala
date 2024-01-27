@@ -21,7 +21,6 @@
  * WifiNetworkStatusWindow.vala: View for displaying status of a single Wi-Fi network.
  */
 
-using Ev3devKit;
 using Ev3devKit.Ui;
 
 namespace BrickManager {
@@ -54,36 +53,35 @@ namespace BrickManager {
         public WifiNetworkStatusWindow (string name) {
             title = name;
 
-            var status_hbox = new Box.horizontal () {
-                padding_top = -6,
-                padding_bottom = -3,
-                border_bottom = 1
-            };
-            content_vbox.add (status_hbox);
-            var status_label = new Label ("Status:") {
-                text_horizontal_align = Grx.TextHAlign.RIGHT
-            };
-            status_hbox.add (status_label);
-            status_value_label = new Label ("???") {
-                text_horizontal_align = Grx.TextHAlign.LEFT
-            };
-            status_hbox .add (status_value_label);
-
             var vscroll = new Scroll.vertical () {
                 can_focus = false
             };
             content_vbox.add (vscroll);
+
             var scroll_vbox = new Box.vertical () {
                 spacing = 3
             };
             vscroll.add (scroll_vbox);
 
+            var status_hbox = new Box.horizontal ();
+            scroll_vbox.add (status_hbox);
+
+            status_hbox.add (new Label ("Status:") {
+                horizontal_align = WidgetAlign.START
+            });
+
+            status_value_label = new Label ("???") {
+                text_horizontal_align = Grx.TextHAlign.RIGHT
+            };
+            status_hbox.add (status_value_label);
+
             var signal_hbox = new Box.horizontal ();
             scroll_vbox.add (signal_hbox);
-            var signal_label = new Label ("Signal:") {
+
+            signal_hbox.add (new Label ("Signal:") {
                 horizontal_align = WidgetAlign.START
-            };
-            signal_hbox.add (signal_label);
+            });
+
             signal_value_label = new Label ("???") {
                 text_horizontal_align = Grx.TextHAlign.RIGHT
             };
@@ -91,10 +89,11 @@ namespace BrickManager {
 
             var security_hbox = new Box.horizontal ();
             scroll_vbox.add (security_hbox);
-            var security_label = new Label ("Security:") {
+
+            security_hbox.add (new Label ("Security:") {
                 horizontal_align = WidgetAlign.START
-            };
-            security_hbox.add (security_label);
+            });
+
             security_value_label = new Label ("???") {
                 text_horizontal_align = Grx.TextHAlign.RIGHT
             };
@@ -102,10 +101,11 @@ namespace BrickManager {
 
             var address_hbox = new Box.horizontal ();
             scroll_vbox.add (address_hbox);
-            var address_label = new Label ("IP Address:") {
+
+            address_hbox.add (new Label ("IP Address:") {
                 horizontal_align = WidgetAlign.START
-            };
-            address_hbox.add (address_label);
+            });
+
             address_value_label = new Label ("???") {
                 text_horizontal_align = Grx.TextHAlign.RIGHT
             };

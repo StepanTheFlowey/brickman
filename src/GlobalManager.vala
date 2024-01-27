@@ -21,32 +21,7 @@
 
 /* FileBrowserController.vala - File Browser controller */
 
-using Linux.Input;
-
 namespace BrickManager {
-
-    /**
-     * Program-defined LED states.
-     *
-     * Brickman uses the LEDs on the EV3 to provide feedback to the user using
-     * these states.
-     */
-    public enum LedState {
-        /**
-         * Indicates that brickman is running normally (ready for input).
-         */
-        NORMAL,
-
-        /**
-         * Indicates that brickman is busy and will not respond to input.
-         */
-        BUSY,
-
-        /**
-         * Indicates that user program is running.
-         */
-        USER
-    }
 
     /**
      * Object for hosting global instances of various managers used in brickman
@@ -82,34 +57,14 @@ namespace BrickManager {
             }
         }
 
-        public void set_leds (LedState state) {
+        public void set_leds () {
             if (!have_ev3_leds)
                 return;
             try {
-                switch (state) {
-                case LedState.NORMAL:
-                    ev3_left_green_led.set_trigger ("default-on");
-                    ev3_right_green_led.set_trigger ("default-on");
-                    ev3_left_red_led.set_trigger ("none");
-                    ev3_left_red_led.set_brightness (0);
-                    ev3_right_red_led.set_trigger ("none");
-                    ev3_right_red_led.set_brightness (0);
-                    break;
-                case LedState.BUSY:
-                    ev3_left_green_led.set_trigger ("none");
-                    ev3_left_green_led.set_brightness (0);
-                    ev3_right_green_led.set_trigger ("none");
-                    ev3_right_green_led.set_brightness (0);
-                    ev3_left_red_led.set_trigger ("default-on");
-                    ev3_right_red_led.set_trigger ("default-on");
-                    break;
-                case LedState.USER:
-                    ev3_left_green_led.set_trigger ("default-on");
-                    ev3_right_green_led.set_trigger ("default-on");
-                    ev3_left_red_led.set_trigger ("default-on");
-                    ev3_right_red_led.set_trigger ("default-on");
-                    break;
-                }
+                ev3_left_green_led.set_trigger ("mmc0");
+                ev3_right_green_led.set_trigger ("mmc0");
+                ev3_left_red_led.set_trigger ("mmc0");
+                ev3_right_red_led.set_trigger ("mmc0");
             } catch (Error err) {
                 critical ("%s", err.message);
             }

@@ -56,34 +56,36 @@ namespace BrickManager {
             }
         }
 
-        public NetworkConnectionEnetWindow (string title) {
-            this.title = title;
+        public NetworkConnectionEnetWindow (string name) {
+            title = name;
 
-            var scroll = new Scroll.vertical ();
+            var scroll = new Scroll.vertical () {
+                padding = 0,
+                padding_top = 1
+            };
             content_vbox.add (scroll);
+
             var vbox = new Box.vertical ();
             scroll.add (vbox);
 
-            vbox.add (new Label ("Interface:") {
-                margin_top = 6
-            });
+            vbox.add (new Label ("Interface:"));
             interface_label = new Label ();
             vbox.add (interface_label);
 
             vbox.add (new Label ("MAC address:") {
-                margin_top = 6
+                margin_top = 4
             });
             address_label = new Label ();
             vbox.add (address_label);
 
             vbox.add (new Label ("MTU:") {
-                margin_top = 6
+                margin_top = 4
             });
             mtu_label = new Label ();
             vbox.add (mtu_label);
 
             vbox.add (new Label ("Method:") {
-                margin_top = 6
+                margin_top = 4
             });
             method_label = new Label ();
             vbox.add (method_label);

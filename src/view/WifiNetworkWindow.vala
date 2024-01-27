@@ -22,39 +22,28 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class WifiNetworkWindow : BrickManagerWindow {
-        Label status_value_label;
+        Ui.Label state_label;
         Ui.Menu menu;
         Ui.MenuItem action_menu_item;
         Ui.MenuItem forget_menu_item;
         Ui.MenuItem network_connection_menu_item;
 
         public string status {
-            get {
-                return status_value_label.text;
-            }
-            set {
-                status_value_label.text = value;
-            }
+            get { return state_label.text; }
+            set { state_label.text = value; }
         }
 
         public string action {
-            get {
-                return action_menu_item.label.text;
-            }
-            set {
-                action_menu_item.label.text = value;
-            }
+            get { return action_menu_item.label.text; }
+            set { action_menu_item.label.text = value; }
         }
 
         bool _can_forget = true;
         public bool can_forget {
-            get {
-                return _can_forget;
-            }
+            get { return _can_forget; }
             set {
                 if (value == _can_forget) {
                     return;
@@ -70,51 +59,57 @@ namespace BrickManager {
         }
 
         public signal void status_selected ();
-
         public signal void action_selected ();
-
         public signal void forget_selected ();
-
         public signal void network_connection_selected ();
 
         public WifiNetworkWindow (string name) {
             title = name;
 
-            var status_hbox = new Box.horizontal () {
-                padding_top = -6,
-                padding_bottom = -3,
-                border_bottom = 1
+            var state_hbox = new Ui.Box.horizontal () {
+                horizontal_align = Ui.WidgetAlign.CENTER,
+                vertical_align = Ui.WidgetAlign.CENTER,
+                padding_top = -5
             };
-            content_vbox.add (status_hbox);
-            var status_label = new Label ("Status:") {
-                text_horizontal_align = Grx.TextHAlign.RIGHT
-            };
-            status_hbox.add (status_label);
-            status_value_label = new Label ("???") {
-                text_horizontal_align = Grx.TextHAlign.LEFT
-            };
-            status_hbox .add (status_value_label);
+            content_vbox.add (state_hbox);
 
-            menu = new Ui.Menu ();
+            state_hbox.add (new Ui.Label ("State:") {
+                horizontal_align = Ui.WidgetAlign.END,
+                margin_right = 4
+            });
+
+            state_label = new Ui.Label ("???") {
+                horizontal_align = Ui.WidgetAlign.START
+            };
+            state_hbox.add (state_label);
+
+            menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = 1,
+                border_top = 1
+            };
             content_vbox.add (menu);
 
             var status_menu_item = new Ui.MenuItem.with_right_arrow ("Status");
-            menu.add_menu_item (status_menu_item);
+            status_menu_item.button.padding_top = -3;
             status_menu_item.button.pressed.connect (() => status_selected ());
+            menu.add_menu_item (status_menu_item);
 
             action_menu_item = new Ui.MenuItem ("???");
-            menu.add_menu_item (action_menu_item);
+            action_menu_item.button.padding_top = -3;
             action_menu_item.button.pressed.connect (() => action_selected ());
+            menu.add_menu_item (action_menu_item);
 
             forget_menu_item = new Ui.MenuItem ("Forget");
-            menu.add_menu_item (forget_menu_item);
+            forget_menu_item.button.padding_top = -3;
             forget_menu_item.button.pressed.connect (() => forget_selected ());
+            menu.add_menu_item (forget_menu_item);
 
-            network_connection_menu_item =
-                new Ui.MenuItem.with_right_arrow ("Network Connection");
+            network_connection_menu_item = new Ui.MenuItem.with_right_arrow ("Network Connection");
+            network_connection_menu_item.button.padding_top = -3;
+            network_connection_menu_item.button.pressed.connect (() => network_connection_selected ());
             menu.add_menu_item (network_connection_menu_item);
-            network_connection_menu_item.button.pressed.connect (() =>
-                network_connection_selected ());
         }
     }
 }

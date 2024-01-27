@@ -61,10 +61,8 @@ namespace BrickManager {
         public signal void change_requested (string method, string? address,
             string? netmask, string? gateway, string[]? dns_addresses);
 
-        public NetworkConnectionIpv4Window (string title) {
-            this.title = title;
-
-            //TODO: This doesn't quite fit on the adafruit 1.8" screen
+        public NetworkConnectionIpv4Window (string name) {
+            title = name;
 
             var grid = new Grid (6, 2);
             content_vbox.add (grid);

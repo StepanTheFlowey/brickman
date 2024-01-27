@@ -75,7 +75,7 @@ namespace BrickManager {
             draw_filled_box (x + main_width, TOP + END_OFFSET,
                 x + main_width + END_WIDTH - 1, HEIGHT - TOP - END_OFFSET,
                 color);
-            draw_text (_text, x + PADDING, TOP + 1 + PADDING, text_options);
+            draw_text (_text, x + PADDING, TOP + PADDING, text_options);
             return total_width;
         }
     }

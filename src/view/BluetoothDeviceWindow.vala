@@ -28,7 +28,6 @@ namespace BrickManager {
         Label address_label;
         Button network_button;
         Button connect_button;
-        Button remove_button;
 
         public string address {
             get { return address_label.text; }
@@ -69,7 +68,9 @@ namespace BrickManager {
         public BluetoothDeviceWindow () {
             address_label = new Label ();
             content_vbox.add (address_label);
+
             content_vbox.add (new Spacer ());
+
             network_button = new Button.with_label ("Network Connection") {
                 visible = false,
                 margin_left = 6,
@@ -77,18 +78,21 @@ namespace BrickManager {
             };
             network_button.pressed.connect (() => network_selected ());
             content_vbox.add (network_button);
+
             var button_hbox = new Box.horizontal () {
                 margin = 6,
                 margin_top = 1
             };
             content_vbox.add (button_hbox);
+
             connect_button = new Button.with_label ("???");
             connect_button.pressed.connect (() => {
                 focus_none ();
                 connect_selected ();
             });
             button_hbox.add (connect_button);
-            remove_button = new Button.with_label ("Remove");
+
+            var remove_button = new Button.with_label ("Remove");
             remove_button.pressed.connect (() => {
                 focus_none ();
                 remove_selected ();

@@ -40,7 +40,7 @@ namespace BrickManager {
         FileMonitor? monitor;
         File initial_directory;
 
-        public string display_name { get { return "File Browser"; } }
+        public string display_name { get { return "Files"; } }
 
         public void show_main_window () {
             if (file_browser_window == null) {

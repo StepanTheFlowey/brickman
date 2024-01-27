@@ -45,25 +45,18 @@ namespace BrickManager {
 
         signal void canceled ();
 
-        public ConnmanAgent () {
-        }
+        public ConnmanAgent () {}
 
-        public async void release () throws DBusError, IOError {
-            //debug ("Released.");
-        }
+        public async void release () throws DBusError, IOError {}
 
         public async void report_error (ObjectPath service_path, string err) throws DBusError, IOError, ConnmanAgentError {
             var dialog = new MessageDialog ("Error", err);
             dialog.show ();
-            // TODO: get user feedback for retry
-            //throw new ConnmanAgentError.RETRY ("User requested retry.");
         }
 
         public async void report_peer_error (ObjectPath peer_path, string err) throws DBusError, IOError, ConnmanAgentError {
             var dialog = new MessageDialog ("Error", err);
             dialog.show ();
-            // TODO: get user feedback for retry
-            //throw new ConnmanAgentError.RETRY ("User requested retry.");
         }
 
         public async void request_browser (ObjectPath service_path, string url) throws DBusError, IOError, ConnmanAgentError {
@@ -75,7 +68,6 @@ namespace BrickManager {
             var required_field_names = new SList<string> ();
             string? previous_passphrase = null;
             fields.foreach ((k, v) => {
-                //debug ("%s %s", k, v.print (true));
                 var requirement = v.lookup_value (REQUIREMENT_KEY, VariantType.STRING);
                 if (requirement != null && requirement.get_string () == "mandatory") {
                     required_field_names.prepend (k);
@@ -118,7 +110,6 @@ namespace BrickManager {
         }
 
         public async HashTable<string, Variant> request_peer_authorization (ObjectPath peer_path, HashTable<string, Variant> fields) throws DBusError, IOError, ConnmanAgentError {
-            //var peer = Peer.from_path_sync (peer_path);
             throw new ConnmanAgentError.CANCELED ("Not implemented.");
         }
 

@@ -22,31 +22,36 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class DeviceBrowserWindow : BrickManagerWindow {
-        internal Ui.Menu menu;
-
         public signal void ports_menu_item_selected ();
         public signal void sensors_menu_item_selected ();
         public signal void motors_menu_item_selected ();
 
         public DeviceBrowserWindow (string display_name) {
             title = display_name;
-            menu = new Ui.Menu ();
+
+            var menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = -1
+            };
             content_vbox.add (menu);
+
             var ports_menu_item = new Ui.MenuItem.with_right_arrow ("Ports");
-            ports_menu_item.button.pressed.connect (() =>
-                ports_menu_item_selected ());
+            ports_menu_item.button.padding_top = -3;
+            ports_menu_item.button.pressed.connect (() => ports_menu_item_selected ());
             menu.add_menu_item (ports_menu_item);
+
             var sensors_menu_item = new Ui.MenuItem.with_right_arrow ("Sensors");
-            sensors_menu_item.button.pressed.connect (() =>
-                sensors_menu_item_selected ());
+            sensors_menu_item.button.padding_top = -3;
+            sensors_menu_item.button.pressed.connect (() => sensors_menu_item_selected ());
             menu.add_menu_item (sensors_menu_item);
+
             var motors_menu_item = new Ui.MenuItem.with_right_arrow ("Motors");
-            motors_menu_item.button.pressed.connect (() =>
-                motors_menu_item_selected ());
+            motors_menu_item.button.padding_top = -3;
+            motors_menu_item.button.pressed.connect (() => motors_menu_item_selected ());
             menu.add_menu_item (motors_menu_item);
         }
     }

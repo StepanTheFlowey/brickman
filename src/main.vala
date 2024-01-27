@@ -23,7 +23,6 @@
 
 using Ev3devKit;
 using Ev3devKit.Ui;
-using Linux.VirtualTerminal;
 using Posix;
 
 namespace BrickManager {
@@ -32,7 +31,7 @@ namespace BrickManager {
     // The global_manager is shared by all of the controller objects
     GlobalManager global_manager;
 
-     public static int main (string[] args) {
+    public static int main (string[] args) {
         try {
             var app = new ConsoleApp ();
 
@@ -68,17 +67,13 @@ namespace BrickManager {
                 network_controller.add_controller (network_controller.wifi_controller);
                 var battery_controller = new BatteryController ();
                 home_window.add_controller (battery_controller);
-                var open_roberta_controller = new OpenRobertaController ();
-                home_window.add_controller (open_roberta_controller);
                 var about_controller = new AboutController ();
                 home_window.add_controller (about_controller);
 
                 Screen.get_active_screen ().status_bar.add_left (network_controller.network_status_bar_item);
-
                 Screen.get_active_screen ().status_bar.add_right (battery_controller.battery_status_bar_item);
                 Screen.get_active_screen ().status_bar.add_right (network_controller.wifi_status_bar_item);
                 Screen.get_active_screen ().status_bar.add_right (bluetooth_controller.status_bar_item);
-                Screen.get_active_screen ().status_bar.add_right (open_roberta_controller.status_bar_item);
 
                 Systemd.Logind.Manager logind_manager = null;
                 Systemd.Logind.Manager.get_system_manager.begin ((obj, res) => {
@@ -88,7 +83,7 @@ namespace BrickManager {
                             logind_manager.power_off.begin (false, (obj, res) => {
                                 try {
                                     logind_manager.power_off.end (res);
-                                    global_manager.set_leds (LedState.BUSY);
+                                    global_manager.set_leds ();
                                     app.quit ();
                                 } catch (Error err) {
                                     var dialog = new MessageDialog ("Error", err.message);
@@ -100,7 +95,7 @@ namespace BrickManager {
                             logind_manager.reboot.begin (false, (obj, res) => {
                                 try {
                                     logind_manager.reboot.end (res);
-                                    global_manager.set_leds (LedState.BUSY);
+                                    global_manager.set_leds ();
                                     app.quit ();
                                 } catch (Error err) {
                                     var dialog = new MessageDialog ("Error", err.message);
@@ -114,7 +109,7 @@ namespace BrickManager {
                     }
                 });
                 home_window.show ();
-                global_manager.set_leds (LedState.NORMAL);
+                global_manager.set_leds ();
             });
 
             // FIXME: Need to hook into input events here to get long back press

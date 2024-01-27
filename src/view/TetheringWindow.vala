@@ -24,7 +24,6 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class TetheringWindow : BrickManagerWindow {
@@ -35,23 +34,30 @@ namespace BrickManager {
 
         public TetheringWindow () {
             title = "Tethering";
+
             menu = new Ui.Menu () {
-                margin_top = -3
+                spacing = 0,
+                padding = 0,
+                padding_top = -1
             };
             content_vbox.add (menu);
+
             tethering_info_menu_item = new Ui.MenuItem.with_right_arrow ("Network info");
+            tethering_info_menu_item.button.padding_top = -3;
             tethering_info_menu_item.button.pressed.connect (() => tethering_info_selected ());
-            tethering_info_menu_item.label.text_horizontal_align = Grx.TextHAlign.LEFT;
             menu.add_menu_item (tethering_info_menu_item);
         }
 
-        public CheckboxMenuItem add_menu_item (string name) {
-            var menu_item = new CheckboxMenuItem (name);
+        public Ui.CheckboxMenuItem add_menu_item (string name) {
+            var menu_item = new Ui.CheckboxMenuItem (name);
+            menu_item.button.padding_top = -3;
+            menu_item.checkbox.margin_top = 3;
+            menu_item.checkbox.margin_bottom = -3;
             menu.insert_menu_item (menu_item, tethering_info_menu_item);
             return menu_item;
         }
 
-        public void remove_menu_item (CheckboxMenuItem menu_item) {
+        public void remove_menu_item (Ui.CheckboxMenuItem menu_item) {
             menu.remove_menu_item (menu_item);
         }
     }

@@ -22,14 +22,11 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class BluetoothDeviceMenuItem : Ui.MenuItem {
-        const string PERCENT = "%";
-
-        Label adapter_label;
-        CheckButton connected_checkbox;
+        Ui.Label adapter_label;
+        Ui.CheckButton connected_checkbox;
 
         public string name {
             get { return label.text; }
@@ -52,16 +49,20 @@ namespace BrickManager {
         }
 
         public BluetoothDeviceMenuItem () {
-            base.with_button (new Button () { margin_top = 1 }, new Label ());
-            var hbox = new Box.horizontal ();
+            base.with_button (new Ui.Button (), new Ui.Label ());
+
+            var hbox = new Ui.Box.horizontal ();
             button.add (hbox);
             hbox.add (label);
-            adapter_label = new Label ("(???)") {
+
+            adapter_label = new Ui.Label ("???") {
                 visible = false
             };
             hbox.add (adapter_label);
-            hbox.add (new Spacer ());
-            connected_checkbox = new CheckButton.checkbox () {
+
+            hbox.add (new Ui.Spacer ());
+
+            connected_checkbox = new Ui.CheckButton.checkbox () {
                 can_focus = false
             };
             hbox.add (connected_checkbox);

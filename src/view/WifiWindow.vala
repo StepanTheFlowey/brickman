@@ -22,14 +22,13 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class WifiWindow : BrickManagerWindow {
         Ui.Menu powered_menu;
         Ui.Menu unpowered_menu;
-        CheckboxMenuItem powered_menu_item;
         Ui.MenuItem scan_menu_item;
+        Ui.CheckboxMenuItem powered_menu_item;
 
         bool _powered;
         public bool powered {
@@ -59,42 +58,57 @@ namespace BrickManager {
                 if (_scanning) {
                     scan_menu_item.label.text = "Scanning...";
                     scan_menu_item.button.can_focus = false;
-                    scan_menu_item.button.focus_next (FocusDirection.DOWN);
+                    scan_menu_item.button.focus_next (Ui.FocusDirection.DOWN);
                 } else {
-                    scan_menu_item.label.text = "Start Scan";
+                    scan_menu_item.label.text = "Start scan";
                     scan_menu_item.button.can_focus = true;
                 }
             }
         }
 
         public signal void scan_selected ();
-
         public signal void connection_selected (Object represented_object);
 
         public WifiWindow () {
             title = "Wi-Fi";
+
             content_vbox.spacing = 0;
-            powered_menu_item = new CheckboxMenuItem ("Powered");
-            powered_menu_item.button.vertical_align = WidgetAlign.START;
+
+            unpowered_menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = -1
+            };
+            content_vbox.add (unpowered_menu);
+
+            powered_menu_item = new Ui.CheckboxMenuItem ("Powered");
+            powered_menu_item.button.padding_top = -3;
             weak Ui.MenuItem weak_powered_menu_item = powered_menu_item;
             powered_menu_item.button.pressed.connect (() => {
                 powered = !powered;
                 weak_powered_menu_item.button.focus ();
             });
-            content_vbox.add (powered_menu_item.button);
+            powered_menu_item.checkbox.margin_top = 3;
+            powered_menu_item.checkbox.margin_bottom = -3;
+            unpowered_menu.add_menu_item (powered_menu_item);
+
             powered_menu = new Ui.Menu () {
-                spacing = 1
+                spacing = 1,
+                padding = 0,
+                padding_top = -1,
+                padding_right = 1
             };
-            scan_menu_item = new Ui.MenuItem ("???");
+
+            scan_menu_item = new Ui.MenuItem ("Start scan");
+            scan_menu_item.button.padding_top = -3;
             scan_menu_item.button.pressed.connect (() => scan_selected ());
             powered_menu.add_menu_item (scan_menu_item);
+
             var networks_label_menu_item = new Ui.MenuItem ("Networks");
-            networks_label_menu_item.label.horizontal_align = WidgetAlign.CENTER;
+            networks_label_menu_item.label.horizontal_align = Ui.WidgetAlign.CENTER;
             networks_label_menu_item.button.border_bottom = 1;
-            networks_label_menu_item.button.margin_bottom = 2;
             networks_label_menu_item.button.can_focus = false;
             powered_menu.add_menu_item (networks_label_menu_item);
-            unpowered_menu = new Ui.Menu ();
 
             scanning = false;
         }

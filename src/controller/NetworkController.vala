@@ -65,7 +65,7 @@ namespace BrickManager {
 
         public WifiController wifi_controller;
 
-        public string display_name { get { return "Wireless and Networks"; } }
+        public string display_name { get { return "Network"; } }
 
         public bool has_tether { get; set; }
         public string tether_address { get; set; }
@@ -83,10 +83,8 @@ namespace BrickManager {
             connections_window = new NetworkConnectionsWindow () {
                 loading = true
             };
-            status_window.network_connections_selected.connect (() =>
-                connections_window.show ());
-            connections_window.connection_selected.connect (
-                on_connections_window_connection_selected);
+            status_window.network_connections_selected.connect (connections_window.show);
+            connections_window.connection_selected.connect (on_connections_window_connection_selected);
             network_status_bar_item = new NetworkStatusBarItem ();
             wifi_status_bar_item = new WifiStatusBarItem ();
 

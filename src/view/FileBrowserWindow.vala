@@ -22,11 +22,10 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class FileBrowserWindow : BrickManagerWindow {
-        Label current_directory_label;
+        Ui.Label current_directory_label;
         Ui.Menu file_menu;
         File? selected_file;
 
@@ -41,14 +40,22 @@ namespace BrickManager {
 
         public FileBrowserWindow (string display_name) {
             title = display_name;
-            current_directory_label = new Label ("???") {
+
+            current_directory_label = new Ui.Label ("???") {
                 text_horizontal_align = Grx.TextHAlign.LEFT,
-                vertical_align = WidgetAlign.START,
+                vertical_align = Ui.WidgetAlign.START,
+                padding_top = -5,
                 padding_bottom = 2,
                 border_bottom = 1
             };
             content_vbox.add (current_directory_label);
-            file_menu = new Ui.Menu ();
+
+            file_menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = -1,
+                padding_right = 1
+            };
             content_vbox.add (file_menu);
         }
 
@@ -59,6 +66,7 @@ namespace BrickManager {
             var menu_item = new Ui.MenuItem (file_name) {
                 represented_object = file
             };
+            menu_item.button.padding_top = -3;
             menu_item.button.pressed.connect (() => {
                 selected_file = file;
                 file_selected (file);

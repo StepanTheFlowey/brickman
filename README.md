@@ -15,16 +15,14 @@ Get the code:
 
 * Clone of the brickman repo.
 
-        git clone git://github.com/ev3dev/brickman
-        cd brickman
-        git submodule update --init --recursive
+        git clone --recurse-submodules https://github.com/ev3dev/brickman
 
 To build for the EV3:
 
 *   Install [Docker] (requires Linux/macOS 10.10.3+/Window 10 Pro)
 *   Install QEMU (Linux only)
 
-        sudo apt-get install qemu-user-static
+        sudo apt install qemu-user-static
 
 *   In the source code directory, run the Docker setup script
 
@@ -47,8 +45,8 @@ not in Docker:
 *   Install build dependencies:
 
         sudo apt-add-repository ppa:ev3dev/tools
-        sudo apt-get update
-        sudo apt-get install devscripts equivs
+        sudo apt update
+        sudo apt install devscripts equivs
         sudo mk-build-deps --install debian/control
 
 * Then...

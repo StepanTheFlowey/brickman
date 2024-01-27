@@ -3,6 +3,10 @@ project ("brickman" LANGUAGES C VERSION 0.11.0)
 
 option (BRICKMAN_TEST "Build the desktop test version.")
 
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -s -pipe")
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
@@ -31,7 +35,6 @@ if (BRICKMAN_TEST)
         test/controller/FakeDeviceBrowserController.vala
         test/controller/FakeFileBrowserController.vala
         test/controller/FakeNetworkController.vala
-        test/controller/FakeOpenRobertaController.vala
     )
 else (BRICKMAN_TEST)
     set (BRICKMAN_SOURCE_FILES
@@ -49,7 +52,6 @@ else (BRICKMAN_TEST)
         src/controller/DeviceBrowserController.vala
         src/controller/FileBrowserController.vala
         src/controller/NetworkController.vala
-        src/controller/OpenRobertaController.vala
         src/GlobalManager.vala
         src/main.vala
     )
@@ -89,8 +91,6 @@ set (BRICKMAN_COMMON_SOURCE_FILES
     src/view/NetworkConnectionsWindow.vala
     src/view/NetworkStatusBarItem.vala
     src/view/NetworkStatusWindow.vala
-    src/view/OpenRobertaStatusBarItem.vala
-    src/view/OpenRobertaWindow.vala
     src/view/PortBrowserWindow.vala
     src/view/PortInfoWindow.vala
     src/view/SelectFromListDialog.vala
@@ -163,8 +163,6 @@ if (BRICKMAN_TEST)
     link_directories(${BRICKMAN_TEST_DEPS_LIBRARY_DIRS})
 endif (BRICKMAN_TEST)
 
-link_libraries(m)
-
 if (CMAKE_CROSSCOMPILING)
     # These need to be added manually for some reason. It is important that they
     # come after other calls to link_libraries or you will get linker errors.
@@ -202,7 +200,6 @@ CUSTOM_VAPIS
     bindings/*.vapi
 OPTIONS
     --target-glib=2.40
-    --thread
     ${EV3DEVKIT_VAPIDIR_OPTION}
     ${GRX3_VAPIDIR_OPTION}
 )

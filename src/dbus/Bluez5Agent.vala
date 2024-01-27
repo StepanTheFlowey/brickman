@@ -31,16 +31,14 @@ namespace BrickManager {
 
         signal void canceled ();
 
-        public Bluez5Agent () {
-        }
+        public Bluez5Agent () {}
 
-        public void release () throws DBusError, IOError {
-            //debug ("Released.");
-        }
+        public void release () throws DBusError, IOError {}
 
         public async string request_pin_code (ObjectPath device_path) throws DBusError, IOError, BlueZError {
             var result = ConfirmationDialogResult.CANCELED;
             var device = Device.get_for_object_path (device_path);
+
             var dialog = new Dialog ();
             weak Dialog weak_dialog = dialog;
             var canceled_handler_id = canceled.connect(() => {
@@ -50,40 +48,46 @@ namespace BrickManager {
                 SignalHandler.disconnect (this, canceled_handler_id);
                 request_pin_code.callback ();
             });
+
             var dialog_vbox = new Box.vertical () {
                 spacing = 3
             };
             dialog.add (dialog_vbox);
-            var title_label = new Label (device.alias) {
+
+            dialog_vbox.add (new Label (device.alias) {
                 vertical_align = WidgetAlign.START,
                 padding = 3,
                 border_bottom = 1
-            };
-            dialog_vbox.add (title_label);
-            var message_label = new Label ("Enter PIN:");
-            dialog_vbox.add (message_label);
-            // TODO: may need to allow alpha and symbol chars.
+            });
+
+            dialog_vbox.add (new Label ("Enter PIN:"));
+
             var text_entry = new TextEntry ("1234            ") {
                 valid_chars = TextEntry.NUMERIC + " ",
                 use_on_screen_keyboard = false,
                 horizontal_align = WidgetAlign.CENTER
             };
             dialog_vbox.add (text_entry);
+
             dialog_vbox.add (new Spacer ());
+
             var button_vbox = new Box.vertical ();
             dialog_vbox.add (button_vbox);
+
             var button_hbox = new Box.horizontal () {
                 horizontal_align = WidgetAlign.CENTER,
                 margin_top = -6,
                 margin_bottom = 3
             };
             button_vbox.add (button_hbox);
+
             var reject_button = new Button.with_label ("Reject");
             reject_button.pressed.connect (() => {
                 result = ConfirmationDialogResult.REJECTED;
                 weak_dialog.close ();
             });
             button_hbox.add (reject_button);
+
             var accept_button = new Button.with_label ("Accept");
             accept_button.pressed.connect (() => {
                 result = ConfirmationDialogResult.ACCEPTED;
@@ -91,12 +95,16 @@ namespace BrickManager {
             });
             button_hbox.add (accept_button);
             text_entry.next_focus_widget_down = accept_button;
+
             dialog.show ();
             yield;
+
             if (result == ConfirmationDialogResult.REJECTED)
                 throw new BlueZError.REJECTED ("Rejected.");
+
             if (result == ConfirmationDialogResult.CANCELED)
                 throw new BlueZError.CANCELED ("Canceled.");
+
             return text_entry.text.replace (" ", "");
         }
 
@@ -119,6 +127,7 @@ namespace BrickManager {
         public async uint32 request_passkey (ObjectPath device_path) throws DBusError, IOError, BlueZError {
             var result = ConfirmationDialogResult.CANCELED;
             var device = Device.get_for_object_path (device_path);
+
             var dialog = new Dialog ();
             weak Dialog weak_dialog = dialog;
             var canceled_handler_id = canceled.connect(() => {
@@ -128,39 +137,46 @@ namespace BrickManager {
                 SignalHandler.disconnect (this, canceled_handler_id);
                 request_passkey.callback ();
             });
+
             var dialog_vbox = new Box.vertical () {
                 spacing = 6
             };
             dialog.add (dialog_vbox);
-            var title_label = new Label (device.alias) {
+
+            dialog_vbox.add (new Label (device.alias) {
                 vertical_align = WidgetAlign.START,
                 padding = 3,
                 border_bottom = 1
-            };
-            dialog_vbox.add (title_label);
-            var message_label = new Label ("Enter passkey");
-            dialog_vbox.add (message_label);
+            });
+
+            dialog_vbox.add (new Label ("Enter passkey"));
+
             var text_entry = new TextEntry ("000000") {
                 valid_chars = TextEntry.NUMERIC,
                 use_on_screen_keyboard = false,
                 horizontal_align = WidgetAlign.CENTER
             };
             dialog_vbox.add (text_entry);
+
             dialog_vbox.add (new Spacer ());
+
             var button_vbox = new Box.vertical ();
             dialog_vbox.add (button_vbox);
+
             var button_hbox = new Box.horizontal () {
                 horizontal_align = WidgetAlign.CENTER,
                 margin_top = -6,
                 margin_bottom = 3
             };
             button_vbox.add (button_hbox);
+
             var reject_button = new Button.with_label ("Reject");
             reject_button.pressed.connect (() => {
                 result = ConfirmationDialogResult.REJECTED;
                 weak_dialog.close ();
             });
             button_hbox.add (reject_button);
+
             var accept_button = new Button.with_label ("Accept");
             accept_button.pressed.connect (() => {
                 result = ConfirmationDialogResult.ACCEPTED;
@@ -168,12 +184,16 @@ namespace BrickManager {
             });
             button_hbox.add (accept_button);
             text_entry.next_focus_widget_down = accept_button;
+
             dialog.show ();
             yield;
+
             if (result == ConfirmationDialogResult.REJECTED)
                 throw new BlueZError.REJECTED ("Rejected.");
+
             if (result == ConfirmationDialogResult.CANCELED)
                 throw new BlueZError.CANCELED ("Canceled.");
+
             return (uint32)int.parse (text_entry.text);
         }
 
@@ -225,6 +245,7 @@ namespace BrickManager {
 
         async void display_confirmation_dialog (string title, string message) throws DBusError, IOError, BlueZError {
             var result = ConfirmationDialogResult.CANCELED;
+
             var dialog = new Dialog ();
             weak Dialog weak_dialog = dialog;
             var canceled_handler_id = canceled.connect(() => {
@@ -234,43 +255,52 @@ namespace BrickManager {
                 SignalHandler.disconnect (this, canceled_handler_id);
                 display_confirmation_dialog.callback ();
             });
+
             var dialog_vbox = new Box.vertical () {
                 spacing = 3
             };
             dialog.add (dialog_vbox);
-            var title_label = new Label (title) {
+
+            dialog_vbox.add (new Label (title) {
                 vertical_align = WidgetAlign.START,
                 padding = 3,
                 border_bottom = 1
-            };
-            dialog_vbox.add (title_label);
-            var message_label = new Label (message);
-            dialog_vbox.add (message_label);
+            });
+
+            dialog_vbox.add (new Label (message));
+
             dialog_vbox.add (new Spacer ());
+
             var button_vbox = new Box.vertical ();
             dialog_vbox.add (button_vbox);
+
             var button_hbox = new Box.horizontal () {
                 horizontal_align = WidgetAlign.CENTER,
                 margin = 3
             };
             button_vbox.add (button_hbox);
+
             var reject_button = new Button.with_label ("Reject");
             reject_button.pressed.connect (() => {
                 result = ConfirmationDialogResult.REJECTED;
                 weak_dialog.close ();
             });
             button_hbox.add (reject_button);
+
             var accept_button = new Button.with_label ("Accept");
             accept_button.pressed.connect (() => {
                 result = ConfirmationDialogResult.ACCEPTED;
                 weak_dialog.close ();
             });
             button_hbox.add (accept_button);
+
             dialog.show ();
             accept_button.focus ();
             yield;
+
             if (result == ConfirmationDialogResult.REJECTED)
                 throw new BlueZError.REJECTED ("Rejected.");
+
             if (result == ConfirmationDialogResult.CANCELED)
                 throw new BlueZError.CANCELED ("Canceled.");
         }

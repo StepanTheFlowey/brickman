@@ -1,3 +1,10 @@
+brickman (0.11.0+fl0wey1) UNRELEASED; urgency=medium
+
+  * Non-maintainer upload.
+  * Local changes.
+
+ -- Flowey <stepanmasirov@gmail.com>  Sat, 27 Jan 2024 18:25:40 +0000
+
 brickman (0.11.0) bullseye; urgency=medium
 
   * lib/connman/Service: add new mDNS properties

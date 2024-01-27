@@ -50,9 +50,13 @@ namespace BrickManager {
             set { serial_number_label.text = value; }
         }
 
-        public AboutWindow (string display_name) {
-            title = display_name;
-            var scroll = new Scroll.vertical ();
+        public AboutWindow (string name) {
+            title = name;
+
+            var scroll = new Scroll.vertical () {
+                padding = 0,
+                padding_top = -1
+            };
             content_vbox.add (scroll);
 
             var scroll_vbox = new Box.vertical ();
@@ -60,33 +64,33 @@ namespace BrickManager {
 
             scroll_vbox.add (new Label ("%s v%s".printf (EXEC_NAME, VERSION)));
             scroll_vbox.add (new Label ("The ev3dev Brick Manager"));
-            scroll_vbox.add (new Label ("(C) 2014-2015 ev3dev.org"));
+            scroll_vbox.add (new Label ("(Flowey modified)"));
             scroll_vbox.add (new Label ("System Info") {
                 border_bottom = 1,
-                padding_bottom = 3,
-                margin_top = 6
+                padding_bottom = 2,
+                margin_top = 4
             });
 
             scroll_vbox.add (new Label ("Kernel:") {
-                margin_top = 6
+                margin_top = 4
             });
             kernel_label = new Label ("???");
             scroll_vbox.add (kernel_label);
 
             scroll_vbox.add (new Label ("Model:") {
-                margin_top = 6
+                margin_top = 4
             });
             model_label = new Label ("???");
             scroll_vbox.add (model_label);
 
             scroll_vbox.add (new Label ("Revision:") {
-                margin_top = 6
+                margin_top = 4
             });
             revision_label = new Label ("???");
             scroll_vbox.add (revision_label);
 
             scroll_vbox.add (new Label ("Serial Number:") {
-                margin_top = 6
+                margin_top = 4
             });
             serial_number_label = new Label ("???");
             scroll_vbox.add (serial_number_label);

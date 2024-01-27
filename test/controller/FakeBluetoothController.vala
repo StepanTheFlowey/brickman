@@ -154,7 +154,7 @@ namespace BrickManager {
                     var menu_item = (BluetoothDeviceMenuItem?)user_data.get_pointer ();
                     if (menu_item != null)
                         bluetooth_window.remove_menu_item (menu_item);
-                    bluetooth_devices_liststore.remove (iter);
+                    bluetooth_devices_liststore.remove (ref iter);
                 }
             });
             bluetooth_devices_treeview_selection.changed.connect (() => {
@@ -240,7 +240,7 @@ namespace BrickManager {
                 .clicked.connect (() => {
                     var path = new ObjectPath (bluetooth_agent_name_entry.text);
                     // TODO: add UI to change Uuid.
-                    agent.authorize_service.begin (path, Uuid.SerialPort, (obj, res) => {
+                    agent.authorize_service.begin (path, Bluez5.Uuid.SerialPort, (obj, res) => {
                         try {
                             agent.authorize_service.end (res);
                             show_message ("Accepted.");

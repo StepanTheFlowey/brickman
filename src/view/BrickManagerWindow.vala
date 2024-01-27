@@ -69,7 +69,8 @@ using Ev3devKit.Ui;
 
             title_label = new Label () {
                 vertical_align = WidgetAlign.START,
-                padding = 3,
+                padding_top = -3,
+                padding_bottom = 2,
                 border_bottom = 1
             };
             window_vbox.add (title_label);

@@ -26,7 +26,7 @@ using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class DeviceBrowserController : Object, IBrickManagerModule {
-        const int WATCH_MS = 500;
+        const int WATCH_MS = 200;
 
         DeviceManager manager;
         DeviceBrowserWindow device_browser_window;
@@ -34,7 +34,7 @@ namespace BrickManager {
         SensorBrowserWindow? sensor_browser_window;
         MotorBrowserWindow? motor_browser_window;
 
-        public string display_name { get { return "Device Browser"; } }
+        public string display_name { get { return "Devices"; } }
 
         public void show_main_window () {
             if (device_browser_window == null) {
@@ -71,6 +71,7 @@ namespace BrickManager {
 
         void on_port_added (Port port) {
             var menu_item = new Ev3devKit.Ui.MenuItem.with_right_arrow (port.address);
+            menu_item.button.padding_top = -3;
             var button_pressed_handler_id = menu_item.button.pressed.connect (() => {
                 var window = new PortInfoWindow (port.address, port.device_name,
                     port.driver_name);
@@ -123,7 +124,7 @@ namespace BrickManager {
                     mode_dialog.show ();
                 });
                 var notify_connected_handler_id = port.notify["connected"].connect (() => {
-                    var dialog = new MessageDialog ("Port Removed",
+                    var dialog = new MessageDialog ("Port removed",
                         "Port %s was disconnected.".printf (port.address));
                     dialog.show ();
                     window.close ();
@@ -261,7 +262,7 @@ namespace BrickManager {
                 ulong notify_connected_handler_id = 0;
                 ulong window_closed_handler_id = 0;
                 notify_connected_handler_id = sensor.notify["connected"].connect (() => {
-                    var dialog = new MessageDialog ("Sensor Removed",
+                    var dialog = new MessageDialog ("Sensor removed",
                         "Sensor %s at %s was disconnected.".printf (sensor.driver_name,
                         sensor.address));
                     dialog.show ();
@@ -342,7 +343,7 @@ namespace BrickManager {
                 ulong notify_connected_handler_id = 0;
                 ulong window_closed_handler_id = 0;
                 notify_connected_handler_id = motor.notify["connected"].connect (() => {
-                    var dialog = new MessageDialog ("Motor Removed",
+                    var dialog = new MessageDialog ("Motor removed",
                         "Motor %s at %s was disconnected.".printf (motor.driver_name,
                         motor.address));
                     dialog.show ();
@@ -381,7 +382,7 @@ namespace BrickManager {
                 ulong notify_connected_handler_id = 0;
                 ulong window_closed_handler_id = 0;
                 notify_connected_handler_id = motor.notify["connected"].connect (() => {
-                    var dialog = new MessageDialog ("Motor Removed",
+                    var dialog = new MessageDialog ("Motor removed",
                         "Motor %s at %s was disconnected.".printf (motor.driver_name,
                         motor.address));
                     dialog.show ();
@@ -419,7 +420,7 @@ namespace BrickManager {
                 ulong notify_connected_handler_id = 0;
                 ulong window_closed_handler_id = 0;
                 notify_connected_handler_id = motor.notify["connected"].connect (() => {
-                    var dialog = new MessageDialog ("Motor Removed",
+                    var dialog = new MessageDialog ("Motor removed",
                         "Motor %s at %s was disconnected.".printf (motor.driver_name,
                         motor.address));
                     dialog.show ();

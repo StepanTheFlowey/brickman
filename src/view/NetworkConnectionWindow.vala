@@ -24,13 +24,12 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     class NetworkConnectionWindow : BrickManagerWindow {
-        Label state_label;
-        CheckButton auto_connect_checkbox;
-        Button connect_button;
+        Ui.Label state_label;
+        Ui.Button connect_button;
+        Ui.CheckButton auto_connect_checkbox;
 
         public string state {
             get { return state_label.text; }
@@ -71,63 +70,71 @@ namespace BrickManager {
         public signal void dns_button_pressed ();
         public signal void enet_button_pressed ();
 
-        public NetworkConnectionWindow (string title) {
-            this.title = title;
+        public NetworkConnectionWindow (string name) {
+            title = name;
 
-            var state_vbox = new Box.vertical () {
-                vertical_align = WidgetAlign.START,
-                padding_bottom = 2,
-                border_bottom = 1
+            var state_hbox = new Ui.Box.horizontal () {
+                horizontal_align = Ui.WidgetAlign.CENTER,
+                vertical_align = Ui.WidgetAlign.CENTER,
+                padding_top = -5
             };
-            content_vbox.add (state_vbox);
-            var state_hbox = new Box.horizontal () {
-                horizontal_align = WidgetAlign.CENTER
-            };
-            state_vbox.add (state_hbox);
-            state_hbox.add (new Label ("State:") {
-                horizontal_align = WidgetAlign.END,
+            content_vbox.add (state_hbox);
+
+            state_hbox.add (new Ui.Label ("State:") {
+                horizontal_align = Ui.WidgetAlign.END,
                 margin_right = 4
             });
-            state_label = new Label () {
-                horizontal_align = WidgetAlign.START
+
+            state_label = new Ui.Label ("???") {
+                horizontal_align = Ui.WidgetAlign.START
             };
             state_hbox.add (state_label);
 
-            var menu = new Ui.Menu ();
+            var menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = 1,
+                border_top = 1
+            };
             content_vbox.add (menu);
 
             var connect_menu_item = new Ui.MenuItem ("Connect");
+            connect_menu_item.button.padding_top = -3;
+            connect_menu_item.button.pressed.connect (on_connect_button_pressed);
             menu.add_menu_item (connect_menu_item);
-            connect_button = connect_menu_item.button;
-            connect_button.pressed.connect (on_connect_button_pressed);
 
-            var auto_connect_menu_item = new CheckboxMenuItem ("Connect automatically");
-            menu.add_menu_item (auto_connect_menu_item);
-            auto_connect_checkbox = auto_connect_menu_item.checkbox;
-            auto_connect_checkbox.notify["checked"].connect (() =>
+            var auto_connect_menu_item = new Ui.CheckboxMenuItem ("Connect automatically");
+            auto_connect_menu_item.button.padding_top = -3;
+            auto_connect_menu_item.checkbox.margin_top = 3;
+            auto_connect_menu_item.checkbox.margin_bottom = -3;
+            auto_connect_menu_item.checkbox.notify["checked"].connect (() =>
                 notify_property ("auto-connect"));
+            menu.add_menu_item (auto_connect_menu_item);
 
             var ipv4_menu_item = new Ui.MenuItem.with_right_arrow ("IPv4");
-            menu.add_menu_item (ipv4_menu_item);
+            ipv4_menu_item.button.padding_top = -3;
             ipv4_menu_item.button.pressed.connect (on_ipv4_button_pressed);
+            menu.add_menu_item (ipv4_menu_item);
 
             var dns_menu_item = new Ui.MenuItem.with_right_arrow ("DNS");
-            menu.add_menu_item (dns_menu_item);
+            dns_menu_item.button.padding_top = -3;
             dns_menu_item.button.pressed.connect (on_dns_button_pressed);
+            menu.add_menu_item (dns_menu_item);
 
             var enet_menu_item = new Ui.MenuItem.with_right_arrow ("ENET");
-            menu.add_menu_item (enet_menu_item);
+            enet_menu_item.button.padding_top = -3;
             enet_menu_item.button.pressed.connect (on_enet_button_pressed);
+            menu.add_menu_item (enet_menu_item);
         }
 
         void set_connect_button_text () {
             if (_is_connect_busy) {
-                ((Label)connect_button.child).text = "Cancel";
+                ((Ui.Label)connect_button.child).text = "Cancel";
             } else {
                 if (_is_connected) {
-                    ((Label)connect_button.child).text = "Disconnect";
+                    ((Ui.Label)connect_button.child).text = "Disconnect";
                 } else {
-                    ((Label)connect_button.child).text = "Connect";
+                    ((Ui.Label)connect_button.child).text = "Connect";
                 }
             }
         }

@@ -208,7 +208,7 @@ namespace BrickManager {
                     var menu_item = (NetworkConnectionMenuItem?)user_data.get_pointer ();
                     if (menu_item != null)
                         network_connections_window.menu.remove_menu_item (menu_item);
-                    network_connections_liststore.remove (iter);
+                    network_connections_liststore.remove (ref iter);
                 }
             });
             network_connections_treeview_selection.changed.connect (() => {
@@ -362,7 +362,7 @@ namespace BrickManager {
                     var menu_item = (NetworkConnectionMenuItem?)user_data.get_pointer ();
                     if (menu_item != null)
                         wifi_window.remove_menu_item (menu_item);
-                    wifi_liststore.remove (iter);
+                    wifi_liststore.remove (ref iter);
                 }
             });
             network_wifi_treeview_selection.changed.connect (() => {

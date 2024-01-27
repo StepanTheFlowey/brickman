@@ -22,15 +22,14 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     public class BluetoothWindow : BrickManagerWindow {
         Ui.Menu powered_menu;
         Ui.Menu unpowered_menu;
-        CheckboxMenuItem powered_menu_item;
-        CheckboxMenuItem visible_menu_item;
         Ui.MenuItem scan_menu_item;
+        Ui.CheckboxMenuItem powered_menu_item;
+        Ui.CheckboxMenuItem visible_menu_item;
 
         bool _powered;
         public bool powered {
@@ -62,38 +61,61 @@ namespace BrickManager {
             get { return _scanning; }
             set {
                 _scanning = value;
-                scan_menu_item.label.text = value ? "Stop Scan" : "Start Scan";
+                scan_menu_item.label.text = value ? "Stop scan" : "Start scan";
             }
         }
 
         public signal void scan_selected ();
 
-        public BluetoothWindow (string display_name) {
-            title = display_name;
+        public BluetoothWindow (string name) {
+            title = name;
+
             content_vbox.spacing = 0;
-            powered_menu_item = new CheckboxMenuItem ("Powered");
-            powered_menu_item.button.vertical_align = WidgetAlign.START;
+
+            unpowered_menu = new Ui.Menu () {
+                spacing = 0,
+                padding = 0,
+                padding_top = -1
+            };
+            content_vbox.add (unpowered_menu);
+
+            powered_menu_item = new Ui.CheckboxMenuItem ("Powered");
+            powered_menu_item.button.padding_top = -3;
             weak Ui.MenuItem weak_powered_menu_item = powered_menu_item;
             powered_menu_item.button.pressed.connect (() => {
                 powered = !powered;
                 weak_powered_menu_item.button.focus ();
             });
-            content_vbox.add (powered_menu_item.button);
-            powered_menu = new Ui.Menu ();
-            visible_menu_item = new CheckboxMenuItem ("Visible");
-            visible_menu_item.checkbox.notify["checked"].connect (() =>
-                notify_property ("bt-visible"));
+            powered_menu_item.checkbox.margin_top = 3;
+            powered_menu_item.checkbox.margin_bottom = -3;
+            unpowered_menu.add_menu_item (powered_menu_item);
+
+            powered_menu = new Ui.Menu () {
+                spacing = 1,
+                padding = 0,
+                padding_top = -1,
+                padding_right = 1
+            };
+
+            visible_menu_item = new Ui.CheckboxMenuItem ("Visible");
+            visible_menu_item.button.padding_top = -3;
+            visible_menu_item.checkbox.margin_top = 3;
+            visible_menu_item.checkbox.margin_bottom = -3;
+            visible_menu_item.checkbox.notify["checked"].connect (() => notify_property ("bt-visible"));
             powered_menu.add_menu_item (visible_menu_item);
-            scan_menu_item = new Ui.MenuItem ("???");
+
+            scan_menu_item = new Ui.MenuItem ("Start scan");
+            scan_menu_item.button.padding_top = -3;
             scan_menu_item.button.pressed.connect (() => scan_selected ());
             powered_menu.add_menu_item (scan_menu_item);
+
             var devices_label_menu_item = new Ui.MenuItem ("Devices");
-            devices_label_menu_item.label.horizontal_align = WidgetAlign.CENTER;
+            devices_label_menu_item.label.horizontal_align = Ui.WidgetAlign.CENTER;
             devices_label_menu_item.button.border_bottom = 1;
-            devices_label_menu_item.button.margin_bottom = 2;
             devices_label_menu_item.button.can_focus = false;
             powered_menu.add_menu_item (devices_label_menu_item);
-            unpowered_menu = new Ui.Menu ();
+
+            scanning = false;
         }
 
         public void add_menu_item (Ui.MenuItem menu_item) {

@@ -46,14 +46,18 @@ namespace BrickManager {
                 text_horizontal_align = Grx.TextHAlign.LEFT
             });
             button.pressed.connect (on_button_pressed);
+
             var hbox = new Box.horizontal ();
             button.add (hbox);
+
             connected_label = new Label ("*") {
                 horizontal_align = WidgetAlign.START,
                 visible = false
             };
             hbox.add (connected_label);
+
             hbox.add (label);
+
             try {
                 var icon = new Ev3devKit.Ui.Icon.from_png (png_file) {
                     horizontal_align = WidgetAlign.END,
