@@ -106,7 +106,7 @@ namespace BrickManager {
             forget_menu_item.button.pressed.connect (() => forget_selected ());
             menu.add_menu_item (forget_menu_item);
 
-            network_connection_menu_item = new Ui.MenuItem.with_right_arrow ("Network Connection");
+            network_connection_menu_item = new Ui.MenuItem.with_right_arrow ("Network connection");
             network_connection_menu_item.button.padding_top = -3;
             network_connection_menu_item.button.pressed.connect (() => network_connection_selected ());
             menu.add_menu_item (network_connection_menu_item);

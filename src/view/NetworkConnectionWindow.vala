@@ -101,6 +101,7 @@ namespace BrickManager {
             var connect_menu_item = new Ui.MenuItem ("Connect");
             connect_menu_item.button.padding_top = -3;
             connect_menu_item.button.pressed.connect (on_connect_button_pressed);
+            connect_button = connect_menu_item.button;
             menu.add_menu_item (connect_menu_item);
 
             var auto_connect_menu_item = new Ui.CheckboxMenuItem ("Connect automatically");
@@ -109,6 +110,7 @@ namespace BrickManager {
             auto_connect_menu_item.checkbox.margin_bottom = -3;
             auto_connect_menu_item.checkbox.notify["checked"].connect (() =>
                 notify_property ("auto-connect"));
+            auto_connect_checkbox = auto_connect_menu_item.checkbox;
             menu.add_menu_item (auto_connect_menu_item);
 
             var ipv4_menu_item = new Ui.MenuItem.with_right_arrow ("IPv4");

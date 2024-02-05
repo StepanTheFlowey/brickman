@@ -24,7 +24,6 @@
  */
 
 using Ev3devKit;
-using Ev3devKit.Ui;
 
 namespace BrickManager {
     class NetworkConnectionsWindow : BrickManagerWindow {
