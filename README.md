@@ -2,55 +2,40 @@ brickman
 ========
 
 The ev3dev Brick Manager.
+Customised by my own opinion:
 
-Issues
-------
-
-Please report issues or feature requests at https://github.com/ev3dev/ev3dev/issues
+* Open Roberta Lab removed.
+* UI Design changed.
+* All LEDs are now set to show disk activity by default.
+* Compilation with LTO enabled.
 
 Hacking
 -------
 
 Get the code:
 
-* Clone of the brickman repo.
+* Clone the repo:
 
-        git clone --recurse-submodules https://github.com/ev3dev/brickman
+        git clone --recurse-submodules --depth=1 https://github.com/StepanTheFlowey/brickman.git
 
-To build for the EV3:
+Building:
 
-*   Install [Docker] (requires Linux/macOS 10.10.3+/Window 10 Pro)
-*   Install QEMU (Linux only)
+*   Install [Docker] and QEMU setup:
 
-        sudo apt install qemu-user-static
+        sudo apt install docker-buildx-plugin docker-ce qemu-user-static qemu-system-arm binfmt-support
 
-*   In the source code directory, run the Docker setup script
-
-        ./docker/setup.sh $ARCH
-
-    Where `$ARCH` is `armel` (or `armhf` if you are building for RPi
-    or BeagleBone).  Output will be saved to a `build-$ARCH` directory.
-
-*   Build the code by running...
-
-        docker exec --tty brickman_armel make install
-
-*   Copy the contents of `build-$ARCH/dist/` to the EV3 and run it.
-
-[Docker]: https://www.docker.com/
-
-To build the desktop test (makes UI development much faster), in a regular terminal,
-not in Docker:
-
-*   Install build dependencies:
+*   Install build dependecies:
 
         sudo apt-add-repository ppa:ev3dev/tools
         sudo apt update
-        sudo apt install devscripts equivs
-        sudo mk-build-deps --install debian/control
+        sudo apt install fakeroot cmake valac netpbm libgudev-1.0-dev libgirepository1.0-dev libev3devkit-dev build-essential debhelper devscripts
 
-* Then...
+*   Build the code by running:
 
-        cmake -P setup.cmake
-        make -C build
-        make -C build run
+        sudo dpkg-buildpackage
+
+*   Copy the result *.deb to EV3 and install it:
+
+        sudo dpkg -i *.deb
+
+[Docker]: https://www.docker.com/
