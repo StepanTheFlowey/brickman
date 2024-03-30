@@ -1,3 +1,10 @@
+brickman (0.11.0+fl0wey2) bullseye; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix UI design.
+
+ -- flowey <stepanmasirov@gmail.com>  Sat, 30 Mar 2024 18:15:44 +0000
+
 brickman (0.11.0+fl0wey1) bullseye; urgency=medium
 
   * Non-maintainer upload.
