@@ -32,7 +32,7 @@ namespace BrickManager {
             menu = new Ui.Menu () {
                 spacing = 0,
                 padding = 0,
-                padding_top = 1,
+                padding_top = -1,
                 padding_right = 1
             };
             content_vbox.add (menu);

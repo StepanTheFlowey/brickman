@@ -70,7 +70,7 @@ namespace BrickManager {
 
             vscroll = new Scroll.vertical () {
                 padding = 0,
-                padding_top = 1,
+                padding_top = -1,
                 can_focus = false
             };
             content_vbox.add (vscroll);
@@ -94,7 +94,6 @@ namespace BrickManager {
             scroll_vbox.add (new Label ("Driver name:") {
                 margin_top = SPACING
             });
-
             scroll_vbox.add (new Label (driver_name));
 
             scroll_vbox.add (new Label ("Mode:") {
@@ -112,7 +111,7 @@ namespace BrickManager {
             scroll_vbox.add (status_value_label);
 
             set_device_button = new Button.with_label ("Set device") {
-                margin = SPACING,
+                margin = 2,
                 margin_bottom = 0
             };
             set_device_button.notify["has-focus"].connect (() => {
@@ -123,7 +122,7 @@ namespace BrickManager {
             // don't add set_device_button - see can_set_device property
 
             set_mode_button = new Button.with_label ("Set mode") {
-                margin = SPACING
+                margin = 2
             };
             set_mode_button.notify["has-focus"].connect (() => {
                 if (set_mode_button.has_focus)

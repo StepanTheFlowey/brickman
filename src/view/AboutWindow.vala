@@ -92,7 +92,9 @@ namespace BrickManager {
             scroll_vbox.add (new Label ("Serial Number:") {
                 margin_top = 4
             });
-            serial_number_label = new Label ("???");
+            serial_number_label = new Label ("???") {
+                margin_bottom = 4
+            };
             scroll_vbox.add (serial_number_label);
         }
     }

@@ -46,8 +46,9 @@ namespace BrickManager {
             title = name;
 
             var vscroll = new Scroll.vertical () {
-                can_focus = false,
-                margin_top = -3
+                padding = 0,
+                padding_top = -1,
+                can_focus = false
             };
             content_vbox.add (vscroll);
 
@@ -71,13 +72,11 @@ namespace BrickManager {
             vbox.add (new Label ("Device name:") {
                 margin_top = SPACING
             });
-
             vbox.add (new Label (device_name));
 
             vbox.add (new Label ("Address:") {
                 margin_top = SPACING
             });
-
             vbox.add (new Label (address));
 
             // TODO: driver needs notification support before making this visible
@@ -89,8 +88,7 @@ namespace BrickManager {
             //vbox.add (running_value_label);
 
             var watch_values_button = new Button.with_label ("Watch values") {
-                margin = SPACING,
-                margin_bottom = 0
+                margin = 2
             };
             var watch_values_button_has_focus_handler_id =
                 watch_values_button.notify["has-focus"].connect (() =>

@@ -42,8 +42,9 @@ namespace BrickManager {
             title = name;
 
             var vscroll = new Scroll.vertical () {
-                can_focus = false,
-                margin_top = -3
+                padding = 0,
+                padding_top = -1,
+                can_focus = false
             };
             content_vbox.add (vscroll);
 
@@ -77,7 +78,7 @@ namespace BrickManager {
             vbox.add (mode_value_label);
 
             var watch_values_button = new Button.with_label ("Watch values") {
-                margin = SPACING,
+                margin = 2,
                 margin_bottom = 0
             };
             var watch_values_button_has_focus_handler_id =
@@ -90,7 +91,7 @@ namespace BrickManager {
             vbox.add (watch_values_button);
 
             var set_mode_button = new Button.with_label ("Set mode") {
-                margin = SPACING,
+                margin = 2,
                 margin_bottom = 0
             };
             var set_mode_button_has_focus_handler_id =
@@ -104,7 +105,7 @@ namespace BrickManager {
 
             if (supports_commands) {
                 var send_command_button = new Button.with_label ("Send command") {
-                    margin = SPACING
+                    margin = 2
                 };
                 var send_command_button_has_focus_handler_id =
                     send_command_button.notify["has-focus"].connect (() =>
