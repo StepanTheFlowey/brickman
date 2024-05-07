@@ -38,8 +38,8 @@ namespace BrickManager {
 
         public signal void file_selected (File file);
 
-        public FileBrowserWindow (string display_name) {
-            title = display_name;
+        public FileBrowserWindow (string name) {
+            title = name;
 
             current_directory_label = new Ui.Label ("???") {
                 text_horizontal_align = Grx.TextHAlign.LEFT,
