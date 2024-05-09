@@ -12,30 +12,31 @@ Customised by my own opinion:
 Hacking
 -------
 
-Get the code:
+* Clone the repo
 
-* Clone the repo:
+    git clone --recurse-submodules --depth=1 https://github.com/StepanTheFlowey/brickman.git
 
-        git clone --recurse-submodules --depth=1 https://github.com/StepanTheFlowey/brickman.git
+* Install [Docker] and QEMU
 
-Building:
+    sudo apt install docker-buildx-plugin docker-ce qemu-user-static qemu-system-arm binfmt-support
 
-*   Install [Docker] and QEMU setup:
+* Enter the container
 
-        sudo apt install docker-buildx-plugin docker-ce qemu-user-static qemu-system-arm binfmt-support
+    docker pull ev3dev/ev3dev-bullseye-ev3-base
+    -to be filled-
 
-*   Install build dependecies:
+* Install build dependecies
 
-        sudo apt-add-repository ppa:ev3dev/tools
-        sudo apt update
-        sudo apt install fakeroot cmake valac netpbm libgudev-1.0-dev libgirepository1.0-dev libev3devkit-dev build-essential debhelper devscripts
+    sudo apt-add-repository ppa:ev3dev/tools
+    sudo apt update
+    sudo apt install fakeroot cmake valac netpbm libgudev-1.0-dev libgirepository1.0-dev libev3devkit-dev build-essential debhelper devscripts
 
-*   Build the code by running:
+* Build the code
 
-        sudo dpkg-buildpackage
+    sudo dpkg-buildpackage
 
-*   Copy the result *.deb to EV3 and install it:
+* Copy result *.deb file (located in parent directory) to EV3 and install it:
 
-        sudo dpkg -i *.deb
+    sudo dpkg -i *.deb
 
-[Docker]: https://www.docker.com/
+[Docker]: https://www.docker.com

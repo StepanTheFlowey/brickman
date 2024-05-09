@@ -35,22 +35,18 @@ namespace BrickManager {
         Button change_button;
 
         public string method {
-            get { return method_label.text; }
             set { method_label.text = value; }
         }
 
         public string address {
-            get { return address_label.text; }
             set { address_label.text = value; }
         }
 
         public string netmask {
-            get { return netmask_label.text; }
             set { netmask_label.text = value; }
         }
 
         public string gateway {
-            get { return gateway_label.text; }
             set { gateway_label.text = value; }
         }
 
@@ -107,7 +103,7 @@ namespace BrickManager {
             };
             grid.add (gateway_label);
 
-            change_button = new Button.with_label ("Change...") {
+            change_button = new Button.with_label ("Change") {
                 horizontal_align = WidgetAlign.CENTER,
                 vertical_align = WidgetAlign.CENTER
             };

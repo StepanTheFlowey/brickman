@@ -54,7 +54,7 @@ namespace BrickManager {
         }
 
         public TetheringInfoWindow () {
-            title = "Tethering network info";
+            title = "Tethering info";
 
             var vscroll = new Scroll.vertical () {
                 margin_top = -3
@@ -69,7 +69,7 @@ namespace BrickManager {
                 margin = 3
             });
 
-            scroll_vbox.add (new Label ("IP Address:"));
+            scroll_vbox.add (new Label ("IP address:"));
 
             ipv4_address_value_label = new Label ("???");
             scroll_vbox.add (ipv4_address_value_label);

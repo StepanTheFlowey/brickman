@@ -29,22 +29,18 @@ namespace BrickManager {
         Ui.CheckButton connected_checkbox;
 
         public string name {
-            get { return label.text; }
             set { label.text = value; }
         }
 
         public string adapter {
-            owned get { return adapter_label.text[1:adapter_label.text.length - 1]; }
             set { adapter_label.text = "(%s)".printf (value); }
         }
 
         public bool show_adapter {
-            get { return adapter_label.visible; }
             set { adapter_label.visible = value; }
         }
 
         public bool connected {
-            get { return connected_checkbox.checked; }
             set { connected_checkbox.checked = value; }
         }
 

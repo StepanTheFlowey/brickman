@@ -7,12 +7,12 @@ Build-Depends: debhelper (>= 12), cmake, valac (>= 0.24),
                libev3devkit-dev (>= 0.6.0), netpbm
 Standards-Version: 4.5.0
 Homepage: https://www.ev3dev.org
-Vcs-Git: https://github.com/ev3dev/brickman.git
-Vcs-Browser: https://github.com/ev3dev/brickman
+Vcs-Git: https://github.com/StepanTheFlowey/brickman.git
+Vcs-Browser: https://github.com/StepanTheFlowey/brickman
 
 Package: brickman
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd, connman, bluez (>= 5)
 Suggests: openrobertalab
 Description: ev3dev Brick Manager
- Provides a user interface for LEGO MINDSTORMS EV3 running ev3dev.
+  Provides a user interface for LEGO MINDSTORMS EV3 running ev3dev.

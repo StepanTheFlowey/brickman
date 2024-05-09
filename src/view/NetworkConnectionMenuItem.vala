@@ -29,12 +29,10 @@ namespace BrickManager {
         Label connected_label;
 
         public bool connected {
-            get { return connected_label.visible; }
             set { connected_label.visible = value; }
         }
 
         public string connection_name {
-            get { return label.text; }
             set { label.text = value; }
         }
 
@@ -43,6 +41,8 @@ namespace BrickManager {
                 padding_top = 1,
                 padding_bottom = 2
             }, new Label () {
+                padding_top = -4,
+                padding_bottom = 3,
                 text_horizontal_align = Grx.TextHAlign.LEFT
             });
             button.pressed.connect (on_button_pressed);

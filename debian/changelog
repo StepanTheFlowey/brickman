@@ -1,16 +1,24 @@
+brickman (0.11.0+fl0wey3) bullseye; urgency=medium
+
+  * Non-maintainer upload
+  * Fix ENET submenu aligment
+  * Move text in menu items (except bluetooth)
+
+ -- Flowey <stepanmasirov@gmail.com>  Thu, 09 May 2024 13:01:07 +0000
+
 brickman (0.11.0+fl0wey2) bullseye; urgency=medium
 
-  * Non-maintainer upload.
-  * Fix UI design.
+  * Non-maintainer upload
+  * Fix UI design
 
- -- flowey <stepanmasirov@gmail.com>  Sat, 30 Mar 2024 18:15:44 +0000
+ -- Flowey <stepanmasirov@gmail.com>  Sat, 30 Mar 2024 18:15:44 +0000
 
 brickman (0.11.0+fl0wey1) bullseye; urgency=medium
 
-  * Non-maintainer upload.
-  * Removed openroberta.
-  * UI design changes.
-  * LEDs are now set to mmc0 trigger.
+  * Non-maintainer upload
+  * Removed openroberta
+  * UI design changes
+  * LEDs are now set to mmc0 trigger
 
  -- Flowey <stepanmasirov@gmail.com>  Sat, 27 Jan 2024 18:25:40 +0000
 

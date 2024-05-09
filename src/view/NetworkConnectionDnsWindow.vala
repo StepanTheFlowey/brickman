@@ -52,7 +52,7 @@ namespace BrickManager {
         public NetworkConnectionDnsWindow (string name) {
             title = name;
 
-            var addresses_label = new Label ("DNS Addresses:") {
+            var addresses_label = new Label ("DNS addresses:") {
                 vertical_align = WidgetAlign.CENTER
             };
             content_vbox.add (addresses_label);
@@ -93,6 +93,7 @@ namespace BrickManager {
         void on_add_button_pressed () {
             var dialog = new Dialog ();
             weak Dialog weak_dialog = dialog;
+
             var dialog_vbox = new Box.vertical () {
                 spacing = 6,
                 margin = 3

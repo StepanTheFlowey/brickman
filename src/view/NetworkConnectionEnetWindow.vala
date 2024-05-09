@@ -33,27 +33,19 @@ namespace BrickManager {
         Label mtu_label;
 
         public string method {
-            get { return method_label.text; }
             set { method_label.text = value; }
         }
 
         public string interface {
-            get { return interface_label.text; }
             set { interface_label.text = value; }
         }
 
         public string address {
-            get { return address_label.text; }
             set { address_label.text = value; }
         }
 
-        int _mtu;
         public int mtu {
-            get { return _mtu; }
-            set {
-                _mtu = value;
-                mtu_label.text = "%d".printf (value);
-            }
+            set { mtu_label.text = "%d".printf (value); }
         }
 
         public NetworkConnectionEnetWindow (string name) {
@@ -61,7 +53,7 @@ namespace BrickManager {
 
             var scroll = new Scroll.vertical () {
                 padding = 0,
-                padding_top = 1
+                padding_top = -1
             };
             content_vbox.add (scroll);
 
@@ -87,7 +79,9 @@ namespace BrickManager {
             vbox.add (new Label ("Method:") {
                 margin_top = 4
             });
-            method_label = new Label ();
+            method_label = new Label () {
+                margin_bottom = 2
+            };
             vbox.add (method_label);
         }
     }

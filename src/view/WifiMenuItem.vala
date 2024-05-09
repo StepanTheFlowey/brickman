@@ -39,28 +39,23 @@ namespace BrickManager {
         SignalBars signal_bars;
 
         public bool connected {
-            get { return connected_label.visible; }
             set { connected_label.visible = value; }
         }
 
         public string connection_name {
-            get { return label.text; }
             set { label.text = value; }
         }
 
-        WifiSecurity _security;
         public WifiSecurity security {
-            get { return _security; }
             set {
-                _security = value;
                 if (secure_icon != null) {
-                    if (_security == WifiSecurity.SECURED)
+                    if (value == WifiSecurity.SECURED)
                         hbox.insert_before (secure_icon, signal_bars);
                     else
                         hbox.remove (secure_icon);
                 }
                 if (wps_icon != null) {
-                    if (_security == WifiSecurity.WPS)
+                    if (value == WifiSecurity.WPS)
                         hbox.insert_before (wps_icon, signal_bars);
                     else
                         hbox.remove (wps_icon);
@@ -78,6 +73,8 @@ namespace BrickManager {
                 padding_top = 1,
                 padding_bottom = 1
             }, new Label () {
+                padding_top = -4,
+                padding_bottom = 3,
                 text_horizontal_align = Grx.TextHAlign.LEFT
             });
             button.pressed.connect (on_button_pressed);
