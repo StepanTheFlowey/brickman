@@ -24,8 +24,8 @@
 using GLib.Bus;
 
 namespace Bluez5.Uuid {
-    const string 16BIT_PREFIX = "0000";
-    const string BASE = "-0000-1000-8000-00805f9b34fb";
+    public const string 16BIT_PREFIX = "0000";
+    public const string BASE = "-0000-1000-8000-00805f9b34fb";
 
     /**
      * Bluetooth Core Specification
