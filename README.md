@@ -2,12 +2,12 @@ brickman
 ========
 
 The ev3dev Brick Manager.
-Customised by my own opinion:
 
+Changes from original:
 * Open Roberta Lab removed.
-* UI Design changed.
-* All LEDs are now set to show disk activity by default.
-* Compilation with LTO enabled.
+* UI design changed.
+* All LEDs are now showing disk activity by default.
+* Compilation with LTO.
 
 Hacking
 -------
@@ -20,10 +20,11 @@ Hacking
 
     sudo apt install docker-buildx-plugin docker-ce qemu-user-static qemu-system-arm binfmt-support
 
-* Enter the container
+* Enter the container (not really sure about the commands)
 
     docker pull ev3dev/ev3dev-bullseye-ev3-base
-    -to be filled-
+    docker run -dti --rm --network=host -v brickman:/brickman --name ev3 ev3dev/ev3dev-bullseye-ev3-base
+    docker exec -it ev3 bash
 
 * Install build dependecies
 
@@ -35,7 +36,12 @@ Hacking
 
     sudo dpkg-buildpackage
 
-* Copy result *.deb file (located in parent directory) to EV3 and install it:
+* Exit container
+* Copy result *.deb file (located in parent directory) to EV3:
+
+    scp *.deb robot@ev3dev:~
+
+* Drop to EV3 shell and install downloaded package:
 
     sudo dpkg -i *.deb
 
