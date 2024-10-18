@@ -14,4 +14,4 @@ Package: brickman
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd, connman, bluez (>= 5)
 Description: ev3dev Brick Manager
-  Provides a user interface for LEGO MINDSTORMS EV3 running ev3dev.
+ Provides a user interface for LEGO MINDSTORMS EV3 running ev3dev.

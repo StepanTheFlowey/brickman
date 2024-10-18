@@ -1,7 +1,7 @@
 brickman (0.11.0+fl0wey5) bullseye; urgency=medium
 
+  * Non-maintainer upload
   * Remove openrobertalab from suggested packages
-  * Build script!!!!!!!
 
  -- Flowey <stepanmasirov@gmail.com>  Sat, 12 Oct 2024 11:11:30 +0000
 
