@@ -24,7 +24,7 @@
 using Ev3devKit;
 
 namespace BrickManager {
-    public class PortBrowserWindow : BrickManagerWindow {
+    class PortBrowserWindow : BrickManagerWindow {
         internal Ui.Menu menu;
 
         public PortBrowserWindow () {

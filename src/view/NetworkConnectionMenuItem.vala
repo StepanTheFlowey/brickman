@@ -25,7 +25,7 @@ using Ev3devKit;
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class NetworkConnectionMenuItem : Ui.MenuItem {
+    class NetworkConnectionMenuItem : Ui.MenuItem {
         Label connected_label;
 
         public bool connected {

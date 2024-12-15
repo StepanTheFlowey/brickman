@@ -24,7 +24,7 @@
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class PortInfoWindow : BrickManagerWindow {
+    class PortInfoWindow : BrickManagerWindow {
         const int SPACING = 4;
 
         Scroll vscroll;

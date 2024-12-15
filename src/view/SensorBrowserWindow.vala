@@ -24,7 +24,7 @@
 using Ev3devKit;
 
 namespace BrickManager {
-    public class SensorBrowserWindow : BrickManagerWindow {
+    class SensorBrowserWindow : BrickManagerWindow {
         internal Ui.Menu menu;
 
         public SensorBrowserWindow () {

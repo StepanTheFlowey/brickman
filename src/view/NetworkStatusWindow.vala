@@ -26,7 +26,7 @@
 using Ev3devKit;
 
 namespace BrickManager {
-    public class NetworkStatusWindow : BrickManagerWindow {
+    class NetworkStatusWindow : BrickManagerWindow {
         Ui.Label state_label;
         Ui.Menu menu;
         Ui.MenuItem network_connections_menu_item;

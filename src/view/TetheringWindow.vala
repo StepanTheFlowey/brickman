@@ -42,7 +42,7 @@ namespace BrickManager {
             };
             content_vbox.add (menu);
 
-            tethering_info_menu_item = new Ui.MenuItem.with_right_arrow ("Network info");
+            tethering_info_menu_item = new Ui.MenuItem.with_right_arrow ("Tethering info");
             tethering_info_menu_item.button.padding_top = -3;
             tethering_info_menu_item.button.pressed.connect (() => tethering_info_selected ());
             menu.add_menu_item (tethering_info_menu_item);

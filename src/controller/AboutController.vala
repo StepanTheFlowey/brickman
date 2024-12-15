@@ -25,7 +25,7 @@ using Ev3devKit.Devices;
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class AboutController : Object, IBrickManagerModule {
+    class AboutController : Object, IBrickManagerModule {
         AboutWindow about_window;
 
         public string display_name { get { return "About"; } }

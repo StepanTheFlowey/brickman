@@ -30,7 +30,7 @@ using Ev3devKit.Ui;
 using Grx;
 
 namespace BrickManager {
-    public class NetworkStatusBarItem : StatusBarItem {
+    class NetworkStatusBarItem : StatusBarItem {
         const ushort TOP = 2;
 
         string _text = "";

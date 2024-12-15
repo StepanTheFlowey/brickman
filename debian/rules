@@ -5,6 +5,9 @@ export DH_QUIET=1
 %:
 	dh $@ --builddirectory=.
 
+override_dh_auto_configure:
+	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF "-GUnix Makefiles" .
+
 override_dh_installinit:
 	# don't do anything
 

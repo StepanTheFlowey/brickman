@@ -26,7 +26,6 @@
 using Ev3devKit;
 
 namespace BrickManager {
-
     class HomeWindow : Ui.Window {
         internal ShutdownDialog shutdown_dialog;
         Ui.Menu menu;

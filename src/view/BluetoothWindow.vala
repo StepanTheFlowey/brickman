@@ -24,7 +24,7 @@
 using Ev3devKit;
 
 namespace BrickManager {
-    public class BluetoothWindow : BrickManagerWindow {
+    class BluetoothWindow : BrickManagerWindow {
         Ui.Menu powered_menu;
         Ui.Menu unpowered_menu;
         Ui.MenuItem scan_menu_item;

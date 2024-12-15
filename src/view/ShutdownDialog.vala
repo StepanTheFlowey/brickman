@@ -26,7 +26,7 @@
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class ShutdownDialog : Dialog {
+    class ShutdownDialog : Dialog {
         Box dialog_vbox;
         Box button_vbox;
         Button power_off_button;

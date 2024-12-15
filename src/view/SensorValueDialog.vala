@@ -24,7 +24,7 @@
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class SensorValueDialog : Dialog {
+    class SensorValueDialog : Dialog {
         Label value_label;
 
         public string value_text {

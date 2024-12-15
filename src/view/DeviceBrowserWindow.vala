@@ -24,7 +24,7 @@
 using Ev3devKit;
 
 namespace BrickManager {
-    public class DeviceBrowserWindow : BrickManagerWindow {
+    class DeviceBrowserWindow : BrickManagerWindow {
         public signal void ports_menu_item_selected ();
         public signal void sensors_menu_item_selected ();
         public signal void motors_menu_item_selected ();

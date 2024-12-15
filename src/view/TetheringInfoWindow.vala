@@ -57,46 +57,49 @@ namespace BrickManager {
             title = "Tethering info";
 
             var vscroll = new Scroll.vertical () {
-                margin_top = -3
+                padding = 0,
+                padding_top = -1
             };
             content_vbox.add (vscroll);
 
             var scroll_vbox = new Box.vertical ();
             vscroll.add (scroll_vbox);
 
-            scroll_vbox.add (new Label ("IPV4") {
+            scroll_vbox.add (new Label ("IPv4") {
                 border_bottom = 1,
-                margin = 3
+                padding_bottom = 2
             });
 
-            scroll_vbox.add (new Label ("IP address:"));
-
+            scroll_vbox.add (new Label ("IP address:") {
+                margin_top = 4
+            });
             ipv4_address_value_label = new Label ("???");
             scroll_vbox.add (ipv4_address_value_label);
 
             scroll_vbox.add (new Label ("Mask:") {
-                margin_top = 3
+                margin_top = 4
             });
-
             ipv4_netmask_value_label = new Label ("???");
             scroll_vbox.add (ipv4_netmask_value_label);
 
             scroll_vbox.add (new Label ("ENET") {
                 border_bottom = 1,
-                margin = 3,
-                margin_top = 6
+                padding_bottom = 2,
+                margin_top = 4
             });
 
-            scroll_vbox.add (new Label ("Interface:"));
-
+            scroll_vbox.add (new Label ("Interface:") {
+                margin_top = 4
+            });
             enet_iface_value_label = new Label ("???");
             scroll_vbox.add (enet_iface_value_label);
 
             scroll_vbox.add (new Label ("MAC:") {
-                margin_top = 3
+                margin_top = 4
             });
-
-            enet_mac_value_label = new Label ("???");
+            enet_mac_value_label = new Label ("???") {
+                margin_bottom = 4
+            };
             scroll_vbox.add (enet_mac_value_label);
         }
     }

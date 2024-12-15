@@ -24,7 +24,7 @@
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class AboutWindow : BrickManagerWindow {
+    class AboutWindow : BrickManagerWindow {
         Label kernel_label;
         Label model_label;
         Label revision_label;

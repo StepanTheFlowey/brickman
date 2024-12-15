@@ -25,7 +25,7 @@ using Connman;
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class NetworkController : Object, IBrickManagerModule {
+    class NetworkController : Object, IBrickManagerModule {
         const string[] TETHERING_TECHNOLOGIES = { "bluetooth", "gadget" };
         const string NET_SUBSYSTEM = "net";
         const string TETHER_DEVICE_NAME = "tether";

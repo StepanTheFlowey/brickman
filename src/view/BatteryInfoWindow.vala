@@ -24,7 +24,7 @@
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class BatteryInfoWindow : BrickManagerWindow {
+    class BatteryInfoWindow : BrickManagerWindow {
         const string UNKNOWN_VALUE = "???";
 
         Label tech_label;
@@ -37,59 +37,31 @@ namespace BrickManager {
         Label power_value_label;
 
         public string technology {
-            get { return tech_value_label.text; }
             set { tech_value_label.text = value; }
         }
 
         public bool has_voltage {
-            get { return voltage_label.visible; }
-            set {
-                voltage_label.visible = value;
-                voltage_value_label.visible = value;
-            }
+            set { voltage_label.visible = voltage_value_label.visible = value; }
         }
 
-        double _voltage;
         public double voltage {
-            get { return _voltage; }
-            set {
-                _voltage = value;
-                voltage_value_label.text = "%.2fV".printf (value);
-            }
+            set { voltage_value_label.text = "%.2fV".printf (value); }
         }
 
         public bool has_current {
-            get { return current_label.visible; }
-            set {
-                current_label.visible = value;
-                current_value_label.visible = value;
-            }
+            set { current_label.visible = current_value_label.visible = value; }
         }
 
-        double _current;
         public double current {
-            get { return _current; }
-            set {
-                _current = value;
-                current_value_label.text = "%.0fmA".printf (value);
-            }
+            set { current_value_label.text = "%.0fmA".printf (value); }
         }
 
         public bool has_power {
-            get { return power_label.visible; }
-            set {
-                power_label.visible = value;
-                power_value_label.visible = value;
-            }
+            set { power_label.visible = power_value_label.visible = value; }
         }
 
-        double _power;
         public double power {
-            get { return _power; }
-            set {
-                _power = value;
-                power_value_label.text = "%.2fW".printf (value);
-            }
+            set { power_value_label.text = "%.2fW".printf (value); }
         }
 
         public BatteryInfoWindow (string name) {

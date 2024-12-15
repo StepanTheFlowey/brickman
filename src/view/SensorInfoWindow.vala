@@ -24,7 +24,7 @@
 using Ev3devKit.Ui;
 
 namespace BrickManager {
-    public class SensorInfoWindow : BrickManagerWindow {
+    class SensorInfoWindow : BrickManagerWindow {
         const int SPACING = 4;
 
         Label mode_value_label;

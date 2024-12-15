@@ -22,16 +22,15 @@
 /* FileBrowserController.vala - File Browser controller */
 
 namespace BrickManager {
-
     /**
      * Object for hosting global instances of various managers used in brickman
      */
-    public class GlobalManager : Object {
-        bool have_ev3_leds = false;
+    class GlobalManager : Object {
         Ev3devKit.Devices.Led ev3_left_green_led;
         Ev3devKit.Devices.Led ev3_right_green_led;
         Ev3devKit.Devices.Led ev3_left_red_led;
         Ev3devKit.Devices.Led ev3_right_red_led;
+        bool have_ev3_leds = false;
 
         /**
          * Gets the device manager for interacting with hardware devices.

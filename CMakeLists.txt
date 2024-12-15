@@ -1,11 +1,11 @@
 cmake_minimum_required (VERSION 3.10)
-project("brickman" LANGUAGES C VERSION 0.11.0)
+project ("brickman" LANGUAGES C VERSION 0.11.0)
 
-option(BRICKMAN_TEST "Build the desktop test version")
+option (BRICKMAN_TEST "Build the desktop test version")
 
-set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -s -pipe")
-set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+set (CMAKE_BUILD_TYPE Release)
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s -pipe -march=armv5tej")
+set (CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
